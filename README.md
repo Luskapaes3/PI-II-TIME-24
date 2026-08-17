@@ -3,15 +3,15 @@ Projeto Integrador do Segundo Semestre - PUCC
 
 Integrantes:
 
-• Lucas Paes Amaro  
+• Bernardo Garcia Barbosa
 
-• Henrique Tutti Frutti
+• Gabriel André Cogo Fernandes
 
-•
+•Henrique Kenji Tutiya
 
-•
+•Lucas Paes Amaro
 
-•
+•Matheus Yudi Misumi
 
 Curso: Engenharia de software 2º semestre.
 
