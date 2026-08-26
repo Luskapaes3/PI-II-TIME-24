@@ -1,5 +1,6 @@
 # Projeto Integrador do Segundo Semestre - PUCC
-Integrantes:
+
+## Integrantes:
 
 • Bernardo Garcia Barbosa
 
@@ -12,6 +13,6 @@ Integrantes:
 • Matheus Yudi Misumi
 
 
-Curso: Engenharia de software 2º semestre.
+## Curso: Engenharia de software 2º semestre.
 
-Professora: Renata Antonia Tadeu Arantes
+## Professora: Renata Antonia Tadeu Arantes
