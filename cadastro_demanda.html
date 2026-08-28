@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="ss.css">
+</head>
+<body>
+    <div class="corpo">
+        <form>
+            <div>
+                <p>Título da demanda</p>
+                <input type="text" id="titulo", required>
+            </div>
+            <div>
+            <p>Descrição da demanda</p>
+                <textarea id="descricao" rows="5", required></textarea>
+            </div>
+            <div>
+                <div style="display: flex;gap: 70px;">
+                    <div>
+                        <p>Tipo da demanda</p>
+                        <select id="select">
+                            <option value="tarefa">Tarefa</option>
+                            <option value="defeito">Defeito</option>
+                            <option value="melhoria">Melhoria</option>
+                            <option value="documentacao">Documentação</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Prioridade</p>
+                        <select id="select">
+                            <option value="baixa">Baixa</option>
+                            <option value="media">Média</option>
+                            <option value="alta">Alta</option>
+                            <option value="critica">Crítica</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 70px;">
+                    <div>
+                        <p>Status</p>
+                        <select id="select">
+                            <option value="aberta">Aberta</option>
+                            <option value="andamento">Em andamento</option>
+                            <option value="revisao">Em revisão</option>
+                            <option value="concluida">Concluída</option>
+                            <option value="cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Projeto Associado</p>
+                        <select id="select">
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <p>Data Limite</p>
+                    <input type="date", required>
+                </div>
+                <div style="display: flex; gap: 70px;">
+                    <button>Cancelar</button>
+                    <button type="submit">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
