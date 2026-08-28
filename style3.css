@@ -1,0 +1,85 @@
+ /* Projeto Integrador */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #cacbcc;
+    color: black;
+}
+.cabeçalho {
+    width: 100;
+    height: 80px;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.conteudo {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+.leftmenu {
+    width: 220px;
+    min-height: calc(100vh - 80px);
+    background-color: #6c96b8;
+    padding: 20px 15px;
+    border-right: 2px solid blue;
+}
+.leftmenu h2 {
+    margin: 0 0 10px 0;
+}
+.leftmenu a {
+    display: block;
+    padding: 12px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+.leftmenu a:hover {
+    background-color: #cacbcc;
+}
+.demandas {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px;
+}
+.demanda {
+    background-color: white;
+    border-radius: 5%;
+    overflow: hidden;
+}
+.demanda h3 {
+    margin: 0;
+    padding: 20px 20px 5px 20px;
+    font-size: 16px;
+    color: blue;
+}
+.demanda p {
+    margin: 0;
+    padding: 135px 20px 20px 20px;
+    font-size: 32px;
+    font-weight: bold;
+}
+.infodemanda {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px;
+}
+.prioridade,
+.tipodademanda,
+.criticas,
+.ending {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5%;
+}
+.infodemanda h3 {
+    margin-top: 0;
+    color: blue;
+}
+.infodemanda li {
+    margin-bottom: 10px;
+}
