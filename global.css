@@ -1,0 +1,54 @@
+/* Propriedades gerais */
+
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; 
+}
+body {
+    background-color: #f4f4f4; color: #333; padding: 20px; 
+}
+
+
+
+
+
+
+
+
+
+/* Propriedades da parte superior da tela (Titulo e descricoes pequenas) */
+
+.titulo-introducao { background: #fff; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; }
+.titulo-introducao h1 { color: #0056b3; font-size: 20px; margin-bottom: 5px; }
+.titulo-introducao {display: flex; justify-content: space-between; align-items: center;}
+
+
+
+
+
+
+
+
+
+/* Propriedades de barras de busca */
+.barra-busca { background: #fff; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; display: flex; justify-content: space-between; }
+
+
+
+
+
+
+
+/* Propriedades de tabelas */
+.tabela-demandas { background: #fff; border: 1px solid #ddd; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+th { background: #eee; color: #000; }
+
+
+
+
+
+
+
+/* footer */
+.footer { text-align: center; margin-top: 20px; font-size: 12px; color: #666; }
