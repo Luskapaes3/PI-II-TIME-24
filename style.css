@@ -1,0 +1,443 @@
+/* ==========================================================
+   ESTILOS GERAIS
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================================
+   LOGIN / CADASTRO / RECUPERAÇÃO DE SENHA
+========================================================== */
+
+body.login,
+body.cadastro,
+body.senha{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:90vh;
+    background:linear-gradient(to left,#cacbcc,#6c96b8);
+}
+
+#login,
+#cadastro,
+#recuperar-senha{
+    width:350px;
+    padding:30px;
+    background:#fff;
+    border:2px solid #6c96b8;
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+
+.descricao{
+    font-size:14px;
+    color:#808080;
+    margin-bottom:25px;
+}
+
+.caixa-de-entrada input{
+    width:100%;
+    padding:10px 0;
+    margin-bottom:20px;
+    border:none;
+    border-bottom:1px solid #666;
+    background:transparent;
+    outline:none;
+    font-size:16px;
+}
+
+.caixa-de-entrada input:focus{
+    border-bottom:2px solid #0067b8;
+}
+
+.acesso button{
+    background:#0067b8;
+    color:#fff;
+    border:none;
+    padding:10px 28px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.acesso button:hover{
+    background:#005da6;
+}
+
+.acesso a{
+    color:#6cb6c0;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.acesso a:hover{
+    color:#005da6;
+    text-decoration:underline;
+}
+
+.cadastro{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+/* ==========================================================
+   DASHBOARD
+========================================================== */
+
+body.dashboard{
+    background:#cacbcc;
+    color:#000;
+}
+
+.cabeçalho{
+    height:80px;
+    background:blue;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.conteudo{
+    display:flex;
+    min-height:calc(100vh - 80px);
+}
+
+.leftmenu{
+    width:220px;
+    background:#6c96b8;
+    padding:20px 15px;
+    border-right:2px solid blue;
+}
+
+.leftmenu a{
+    display:block;
+    padding:12px 15px;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+.leftmenu a:hover{
+    background:#cacbcc;
+}
+
+.demandas{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:30px;
+}
+
+.demanda{
+    background:#fff;
+    border-radius:5%;
+}
+
+.demanda h3{
+    color:blue;
+    padding:20px 20px 5px;
+}
+
+.demanda p{
+    padding:135px 20px 20px;
+    font-size:32px;
+    font-weight:bold;
+}
+
+.infodemanda{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    padding:30px;
+}
+
+.prioridade,
+.tipodademanda,
+.criticas,
+.ending{
+    background:#fff;
+    padding:20px;
+    border-radius:5%;
+}
+
+.infodemanda h3{
+    color:blue;
+}
+
+/* ==========================================================
+   LISTAGEM DE DEMANDAS
+========================================================== */
+
+body.lista{
+    background:#f4f4f4;
+    color:#333;
+    padding:20px;
+}
+
+.titulo-introducao{
+    background:#fff;
+    border:1px solid #ddd;
+    padding:15px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.titulo-introducao h1{
+    color:#0056b3;
+}
+
+.barra-busca{
+    background:#fff;
+    border:1px solid #ddd;
+    padding:10px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.tabela-demandas{
+    background:#fff;
+    border:1px solid #ddd;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    background:#eee;
+}
+
+.footer{
+    text-align:center;
+    margin-top:20px;
+    font-size:12px;
+    color:#666;
+}
+
+/* ==========================================================
+   CADASTRO DE DEMANDA
+========================================================== */
+
+.corpo{
+    width:100%;
+    padding:20px;
+}
+
+form {
+    max-width: 730px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 24px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.12);
+    margin-left: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.selects{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+
+.campo{
+    margin-bottom:18px;
+}
+
+.linha{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea{
+    width:100%;
+    border:1px solid #555;
+    padding:10px;
+}
+
+textarea{
+    resize:vertical;
+    min-height:112px;
+}
+
+.botoes{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:22px;
+    border-top:1px solid #ddd;
+    padding-top:16px;
+}
+
+.cancelar{
+    background:#fff;
+}
+
+.salvar{
+    background:#087fce;
+    color:#fff;
+    font-weight:bold;
+}
+
+.salvar:hover{
+    background:#066fae;
+}
+
+/* ==========================================================
+   DETALHES DA DEMANDA
+========================================================== */
+
+#cabecalho{
+    background:#fff;
+    border:1px solid #ddd;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+#cabecalho h1{
+    color:#0056b3;
+}
+
+.btn-voltar{
+    background:#eee;
+    border:1px solid #ccc;
+    padding:8px 15px;
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+}
+
+.btn-voltar:hover{
+    background:#ddd;
+}
+
+.conteudo-principal{
+    background:#fff;
+    border:1px solid #ddd;
+    padding:25px;
+}
+
+.header-demanda{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ddd;
+    margin-bottom:20px;
+    padding-bottom:15px;
+}
+
+.badges{
+    display:flex;
+    gap:8px;
+}
+
+.badge{
+    padding:5px 10px;
+    border-radius:3px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status-andamento{
+    background:#e3f2fd;
+    color:#0d47a1;
+}
+
+.prioridade-critica{
+    background:#ffebee;
+    color:#c62828;
+}
+
+.caixa-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    background:#f9f9f9;
+    border:1px solid #eee;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+.info-item{
+    width:30%;
+}
+
+.secao{
+    margin-bottom:25px;
+}
+
+.secao h3{
+    color:#0056b3;
+    margin-bottom:10px;
+    border-bottom:1px solid #eee;
+    padding-bottom:5px;
+}
+
+.tabela-historico{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.tabela-historico th,
+.tabela-historico td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+.botoes-acao{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    border-top:1px solid #ddd;
+    padding-top:15px;
+}
+
+.btn-principal{
+    background:#0056b3;
+    color:#fff;
+}
+
+.btn-principal:hover{
+    background:#004494;
+}
+
+.btn-secundario{
+    background:#fff;
+}
+
+.btn-secundario:hover{
+    background:#eee;
+}
+
+#rodape{
+    text-align:center;
+    margin-top:20px;
+    font-size:12px;
+    color:#666;
+}
