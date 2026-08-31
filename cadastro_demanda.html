@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-        <link rel="stylesheet" href="ss.css">
+        <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="cabeçalho">
+        <h1>Demandas</h1>
+    </div>
+    <div class="conteudo">
+        <div class="leftmenu">
+            <h2><a href="#">Dashboard</a></h2>
+            <h2><a href="#">Demandas</a></h2>
+            <h2><a href="#">Projetos</a></h2>
+            <h2><a href="#">Usuários</a></h2>
+            <h2><a href="#">Perfil</a></h2>
+        </div>
     <div class="corpo">
         <form>
             <div>
@@ -17,7 +28,7 @@
             <p>Descrição da demanda</p>
                 <textarea id="descricao" rows="5", required></textarea>
             </div>
-            <div>
+            <div class="selects">
                 <div style="display: flex;gap: 70px;">
                     <div>
                         <p>Tipo da demanda</p>
