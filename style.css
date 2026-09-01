@@ -238,6 +238,7 @@ th{
 .corpo{
     width:100%;
     padding:20px;
+
 }
 
 form {
@@ -246,7 +247,7 @@ form {
     border: 1px solid #ddd;
     padding: 24px;
     box-shadow: 0 2px 5px rgba(0,0,0,.12);
-    margin-left: 350px;
+    margin-left: 250px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -285,11 +286,20 @@ textarea{
 
 .botoes{
     display:flex;
-    justify-content:flex-end;
+    justify-content:center;
     gap:12px;
     margin-top:22px;
     border-top:1px solid #ddd;
-    padding-top:16px;
+    padding-top:10px;
+    width: 140px;
+    height: 40px;
+    background-color: #0875bd;
+    color: white;
+    border: none;
+    border-radius: 0;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
 }
 
 .cancelar{
