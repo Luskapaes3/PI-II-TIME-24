@@ -1,10 +1,15 @@
+/*By-Gabriel André Cogo Fernandes*/
+/*index*/
 body{
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
+
+    /* Define a altura mínima da página */
     min-height: 90vh;
+
     background: linear-gradient(to left, #cacbcc, #6c96b8);
 }
 
@@ -13,7 +18,12 @@ body{
     padding: 30px;
     border: 2px solid #6c96b8;
     border-radius: 2px;
+
+
+    /* Adiciona uma sombra ao redor da caixa */
     background-color: white;
+
+    /* Adiciona uma sombra ao redor da caixa */
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -27,14 +37,23 @@ body{
     width: 100%;
     padding: 10px 0;
     margin-bottom: 20px;
+
+    /* Remove a borda padrão do campo */
     border: none;
+
+    /* Adiciona apenas uma borda na parte inferior */
     border-bottom: 1px solid #666;
+
+    /* Remove o contorno padrão quando o campo é selecionado */
     outline: none;
+
     background: transparent;
     font-size: 16px;
 }
 
+/* Altera a aparência do campo quando ele é selecionado */
 .caixa-de-entrada input:focus{
+    /* Muda a cor e aumenta a espessura da borda inferior */
     border-bottom: 2px solid #0067b8;
 }
 
