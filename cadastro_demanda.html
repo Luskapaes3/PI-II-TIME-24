@@ -3,84 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <link rel="stylesheet" href="style.css">
+    <title>SITE PORRA!</title>
+    <link rel="stylesheet" href="global.css">
 </head>
 <body>
-    <div id="cabecalho", style="text-align: center;">
-        <h1>Cadastro de Demandas</h1>
+
+
+
+
+    <div class="titulo-introducao">
+
+        <h1>Listagem de Demandas</h1>
+        <p>Gerencie e Acompanhe todas as demandas cadastradas.</p>
+
+        <button class="lateral-direita">Nova demanda</button>
     </div>
-    <div class="conteudo">
-        <div class="leftmenu">
-            <h2><a href="#">Dashboard</a></h2>
-            <h2><a href="#">Demandas</a></h2>
-            <h2><a href="#">Projetos</a></h2>
-            <h2><a href="#">Usuários</a></h2>
-            <h2><a href="#">Perfil</a></h2>
-        </div>
-    <div class="corpo">
-        <form>
-            <div>
-                <h2>Título da demanda</h2>
-                <input type="text" id="titulo", required>
-            </div>
-            <div>
-            <h2>Descrição da demanda</h2>
-                <textarea id="descricao" rows="5", required></textarea>
-            </div>
-            <div class="selects">
-                <div style="display: flex;gap: 70px;">
-                    <div>
-                        <h3>Tipo da demanda</h3>
-                        <select id="select">
-                            <option value="tarefa">Tarefa</option>
-                            <option value="defeito">Defeito</option>
-                            <option value="melhoria">Melhoria</option>
-                            <option value="documentacao">Documentação</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h3>Prioridade</h3>
-                        <select id="select">
-                            <option value="baixa">Baixa</option>
-                            <option value="media">Média</option>
-                            <option value="alta">Alta</option>
-                            <option value="critica">Crítica</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 70px;">
-                    <div>
-                        <h3>Status</h3>
-                        <select id="select">
-                            <option value="aberta">Aberta</option>
-                            <option value="andamento">Em andamento</option>
-                            <option value="revisao">Em revisão</option>
-                            <option value="concluida">Concluída</option>
-                            <option value="cancelada">Cancelada</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h3>Projeto Associado</h3>
-                        <select id="select">
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <h3>Data Limite</h3>
-                    <input type="date", required>
-                </div>
-                <div>
-                    <h3>Responsável</h3>
-                    <select id="select"></select>
-                </div>
-                <div style="display: flex; gap: 70px;">
-                    <button class="botoes">Cancelar</button>
-                    <button type="submit" class="botoes">Salvar</button>
-                </div>
-            </div>
-        </form>
+
+
+
+
+
+    <div class="barra-busca">
+
+        <p>Filtrar por Título</p>
+        <select>
+            <option>Titulo-Placeholder1</option>
+            <option>Titulo-Placeholder2</option>
+            <option>Titulo-Placeholder3</option>
+        </select>
+
+        <p>Filtrar por Tipo</p>
+        <select>
+            <option>Tarefa</option>
+            <option>Defeito</option>
+            <option>Melhoria</option>
+            <option>Documentação</option>
+        </select>
+
+        <p>Filtrar por Prioridade</p>
+        <select>
+            <option>Crítica</option>
+            <option>Alta</option>
+            <option>Média</option>
+            <option>Baixa</option>
+        </select>
+
+        <p>Filtrar por Status</p>
+        <select>
+            <option>Aberta</option>
+            <option>Em andamento</option>
+            <option>Em revisão</option>
+            <option>Concluída</option>
+            <option>Cancelada</option>
+        </select>
+
+        <button>ativar filtro</button> 
+
     </div>
+
+
+
+
+
+
+    <div class="tabela-demandas">
+        <table>
+            <tr> <!-- definindo nome das colunas-->
+                <th>titulo</th>
+                <th>tipo</th>
+                <th>prioridade</th>
+                <th>status</th>
+                <th>responsavel</th>
+                <th>data de criação</th>
+                <th>prazo de finalização</th>
+            </tr>
+            <tr> <!-- Linha 1 / Demanda 1 -->
+                <td>demanda1 titulo</td>
+                <td>demanda1 tipo</td>
+                <td>demanda1 prioridade</td>
+                <td>demanda1 status</td>
+                <td>demanda1 responsavel</td>
+                <td>demanda1 data_criação</td>
+                <td>demanda1 prazo</td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+    <div class="footer">
+        <p>©Sistema sem nome</p>
+    </div>
+
+
+
+
 </body>
 </html>
 
