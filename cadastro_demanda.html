@@ -7,8 +7,8 @@
         <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cabeçalho">
-        <h1>Demandas</h1>
+    <div id="cabecalho", style="text-align: center;">
+        <h1>Cadastro de Demandas</h1>
     </div>
     <div class="conteudo">
         <div class="leftmenu">
@@ -21,17 +21,17 @@
     <div class="corpo">
         <form>
             <div>
-                <p>Título da demanda</p>
+                <h2>Título da demanda</h2>
                 <input type="text" id="titulo", required>
             </div>
             <div>
-            <p>Descrição da demanda</p>
+            <h2>Descrição da demanda</h2>
                 <textarea id="descricao" rows="5", required></textarea>
             </div>
             <div class="selects">
                 <div style="display: flex;gap: 70px;">
                     <div>
-                        <p>Tipo da demanda</p>
+                        <h3>Tipo da demanda</h3>
                         <select id="select">
                             <option value="tarefa">Tarefa</option>
                             <option value="defeito">Defeito</option>
@@ -40,7 +40,7 @@
                         </select>
                     </div>
                     <div>
-                        <p>Prioridade</p>
+                        <h3>Prioridade</h3>
                         <select id="select">
                             <option value="baixa">Baixa</option>
                             <option value="media">Média</option>
@@ -51,7 +51,7 @@
                 </div>
                 <div style="display: flex; gap: 70px;">
                     <div>
-                        <p>Status</p>
+                        <h3>Status</h3>
                         <select id="select">
                             <option value="aberta">Aberta</option>
                             <option value="andamento">Em andamento</option>
@@ -61,21 +61,22 @@
                         </select>
                     </div>
                     <div>
-                        <p>Projeto Associado</p>
+                        <h3>Projeto Associado</h3>
                         <select id="select">
                         </select>
                     </div>
                 </div>
                 <div>
-                    <p>Data Limite</p>
+                    <h3>Data Limite</h3>
                     <input type="date", required>
                 </div>
                 <div style="display: flex; gap: 70px;">
-                    <button>Cancelar</button>
-                    <button type="submit">Salvar</button>
+                    <button class="botoes">Cancelar</button>
+                    <button type="submit" class="botoes">Salvar</button>
                 </div>
             </div>
         </form>
     </div>
 </body>
 </html>
+
