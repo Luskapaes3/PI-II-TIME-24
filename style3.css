@@ -1,10 +1,14 @@
- /* Projeto Integrador */
+/*By-Bernardo Garcia Barbosa*/ 
+/*DashboardPI*/
+/* Config geral da pagina */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #cacbcc;
     color: black;
 }
+/* Config o cabeçalho do Dashboard, definindo seu tamanho, cor e
+centralizando o título horizontal e verticalmente */
 .cabeçalho {
     width: 100;
     height: 80px;
@@ -14,10 +18,14 @@ body {
     justify-content: center;
     color: white;
 }
+/* Organiza o conteudo principal da pagina, colocando o menu lateral
+e a área das demandas lado a lado */
 .conteudo {
     display: flex;
     min-height: calc(100vh - 80px);
 }
+/* config do menu lateral, seu tamanho, cor de fundo, espaçamento interno
+e uma borda para separar da página */
 .leftmenu {
     width: 220px;
     min-height: calc(100vh - 80px);
@@ -25,9 +33,11 @@ body {
     padding: 20px 15px;
     border-right: 2px solid blue;
 }
+/* Espacamento dos titulos */
 .leftmenu h2 {
     margin: 0 0 10px 0;
 }
+/* aparencia e tamanho da area clicavel do link */
 .leftmenu a {
     display: block;
     padding: 12px 15px;
@@ -35,9 +45,11 @@ body {
     text-decoration: none;
     border-radius: 8px;
 }
+/* cor do fundo do link */
 .leftmenu a:hover {
     background-color: #cacbcc;
 }
+/* organiza as demandas em counas */
 .demandas {
     flex: 1;
     display: grid;
@@ -45,29 +57,34 @@ body {
     gap: 20px;
     padding: 30px;
 }
+/* aparencia dos cards das demandas */
 .demanda {
     background-color: white;
     border-radius: 5%;
     overflow: hidden;
 }
+/* titulos dos cards */
 .demanda h3 {
     margin: 0;
     padding: 20px 20px 5px 20px;
     font-size: 16px;
     color: blue;
 }
+/* numeros dos cards */
 .demanda p {
     margin: 0;
     padding: 135px 20px 20px 20px;
     font-size: 32px;
     font-weight: bold;
 }
+/* organiza em 2 colunas as informacoes das demandas */
 .infodemanda {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 30px;
 }
+/* define a aparencia dos cards das informacoes das demandas */
 .prioridade,
 .tipodademanda,
 .criticas,
@@ -76,10 +93,12 @@ body {
     padding: 20px;
     border-radius: 5%;
 }
+/* titulos dos cards */
 .infodemanda h3 {
     margin-top: 0;
     color: blue;
 }
+/* espaco entre as listas pra melhorar a visualização */
 .infodemanda li {
     margin-bottom: 10px;
 }
