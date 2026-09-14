@@ -1,105 +1,186 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SITE PORRA!</title>
-    <link rel="stylesheet" href="global.css">
+
+    <title>Demandas</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
+
 <body>
 
-
-
-
-    <div class="titulo-introducao">
-
-        <h1>Listagem de Demandas</h1>
-        <p>Gerencie e Acompanhe todas as demandas cadastradas.</p>
-
-        <button class="lateral-direita">Nova demanda</button>
+    <div class="cabeçalho">
+        <h1>Demandas</h1>
     </div>
 
+    <div class="conteudo">
+
+        <div class="leftmenu">
+            <h2><a href="#">Dashboard</a></h2>
+            <h2><a href="#">Demandas</a></h2>
+            <h2><a href="#">Projetos</a></h2>
+            <h2><a href="#">Usuários</a></h2>
+            <h2><a href="#">Perfil</a></h2>
+        </div>
+
+        <div class="corpo">
+
+            <form id="formDemanda" novalidate>
+
+                <div>
+                    <p>Título da demanda</p>
+
+                    <input
+                        type="text"
+                        id="titulo"
+                        required
+                        minlength="5"
+                        maxlength="100"
+                    >
+
+                    <div id="erroTitulo" class="erro"></div>
+                </div>
 
 
+                <div>
+                    <p>Descrição da demanda</p>
+
+                    <textarea
+                        id="descricao"
+                        rows="5"
+                        required
+                        minlength="10"
+                        maxlength="500"
+                    ></textarea>
+
+                    <div id="erroDescricao" class="erro"></div>
+                </div>
 
 
-    <div class="barra-busca">
+                <div class="selects">
 
-        <p>Filtrar por Título</p>
-        <select>
-            <option>Titulo-Placeholder1</option>
-            <option>Titulo-Placeholder2</option>
-            <option>Titulo-Placeholder3</option>
-        </select>
+                    <!-- Tipo e prioridade -->
+                    <div style="display: flex; gap: 70px;">
 
-        <p>Filtrar por Tipo</p>
-        <select>
-            <option>Tarefa</option>
-            <option>Defeito</option>
-            <option>Melhoria</option>
-            <option>Documentação</option>
-        </select>
+                        <div>
+                            <p>Tipo da demanda</p>
 
-        <p>Filtrar por Prioridade</p>
-        <select>
-            <option>Crítica</option>
-            <option>Alta</option>
-            <option>Média</option>
-            <option>Baixa</option>
-        </select>
+                            <select id="tipo" required>
+                                <option value="">Selecione</option>
+                                <option value="tarefa">Tarefa</option>
+                                <option value="defeito">Defeito</option>
+                                <option value="melhoria">Melhoria</option>
+                                <option value="documentacao">Documentação</option>
+                            </select>
 
-        <p>Filtrar por Status</p>
-        <select>
-            <option>Aberta</option>
-            <option>Em andamento</option>
-            <option>Em revisão</option>
-            <option>Concluída</option>
-            <option>Cancelada</option>
-        </select>
+                            <div id="erroTipo" class="erro"></div>
+                        </div>
 
-        <button>ativar filtro</button> 
+
+                        <div>
+                            <p>Prioridade</p>
+
+                            <select id="prioridade" required>
+                                <option value="">Selecione</option>
+                                <option value="baixa">Baixa</option>
+                                <option value="media">Média</option>
+                                <option value="alta">Alta</option>
+                                <option value="critica">Crítica</option>
+                            </select>
+
+                            <div id="erroPrioridade" class="erro"></div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status e projeto -->
+                    <div style="display: flex; gap: 70px;">
+
+                        <div>
+                            <p>Status</p>
+
+                            <select id="status" required>
+                                <option value="">Selecione</option>
+                                <option value="aberta">Aberta</option>
+                                <option value="andamento">Em andamento</option>
+                                <option value="revisao">Em revisão</option>
+                                <option value="concluida">Concluída</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+
+                            <div id="erroStatus" class="erro"></div>
+                        </div>
+
+
+                        <div>
+                            <p>Projeto Associado</p>
+
+                            <select id="projeto" required>
+                                <option value="">Selecione um projeto</option>
+                                <option value="projeto1">Projeto 1</option>
+                                <option value="projeto2">Projeto 2</option>
+                                <option value="projeto3">Projeto 3</option>
+                            </select>
+
+                            <div id="erroProjeto" class="erro"></div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Data limite -->
+                    <div>
+                        <p>Data Limite</p>
+
+                        <input
+                            type="date"
+                            id="dataLimite"
+                            required
+                        >
+
+                        <div id="erroData" class="erro"></div>
+                    </div>
+
+
+                    <!-- Botões -->
+                    <div style="display: flex; gap: 70px;">
+
+                        <button
+                            type="button"
+                            id="btnCancelar"
+                        >
+                            Cancelar
+                        </button>
+
+                        <button type="submit">
+                            Salvar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+            <!-- Resultado -->
+            <section id="painelResultado" class="resultado" style="display: none;">
+
+                <h2>Demanda cadastrada</h2>
+
+                <pre id="resultado"></pre>
+
+            </section>
+
+        </div>
 
     </div>
-
-
-
-
-
-
-    <div class="tabela-demandas">
-        <table>
-            <tr> <!-- definindo nome das colunas-->
-                <th>titulo</th>
-                <th>tipo</th>
-                <th>prioridade</th>
-                <th>status</th>
-                <th>responsavel</th>
-                <th>data de criação</th>
-                <th>prazo de finalização</th>
-            </tr>
-            <tr> <!-- Linha 1 / Demanda 1 -->
-                <td>demanda1 titulo</td>
-                <td>demanda1 tipo</td>
-                <td>demanda1 prioridade</td>
-                <td>demanda1 status</td>
-                <td>demanda1 responsavel</td>
-                <td>demanda1 data_criação</td>
-                <td>demanda1 prazo</td>
-            </tr>
-        </table>
-    </div>
-
-
-
-
-
-    <div class="footer">
-        <p>©Sistema sem nome</p>
-    </div>
-
-
-
 
 </body>
-</html>
 
+</html>
