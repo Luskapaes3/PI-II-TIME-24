@@ -1,5 +1,3 @@
-/*By-Gabriel André Cogo Fernandes*/
-/*index*/
 body{
     font-family: Arial, sans-serif;
     display: flex;
@@ -10,6 +8,7 @@ body{
     /* Define a altura mínima da página */
     min-height: 90vh;
 
+
     background: linear-gradient(to left, #cacbcc, #6c96b8);
 }
 
@@ -18,7 +17,6 @@ body{
     padding: 30px;
     border: 2px solid #6c96b8;
     border-radius: 2px;
-
 
     /* Adiciona uma sombra ao redor da caixa */
     background-color: white;
@@ -71,19 +69,20 @@ body{
     background-color: #005da6;
 }
 
-.acesso a{
+.caixa-de-entrada input.is-invalid{
+    border-bottom: 2px solid #d9534f;
+}
+
+.erro{
+    display: block;
+    color: #d9534f;
+    font-size: 12px;
+    min-height: 14px;
+    margin-bottom: 12px;
+}
+
+.sucesso{
     color: #6cb6c0;
-    transition: color 0.3s ease;
-    text-decoration: none;
-}
-
-.acesso a:hover{
-    color: #005da6;
-    text-decoration: underline;
-}
-
-.cadastro{
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 14px;
+    font-weight: bold;
 }
