@@ -316,6 +316,13 @@ textarea{
     background:#066fae;
 }
 
+.erro {
+    color: red;
+    font-size: 14px;
+    height: 20px;
+    margin-top: 5px;
+}
+
 /* ==========================================================
    DETALHES DA DEMANDA
 ========================================================== */
