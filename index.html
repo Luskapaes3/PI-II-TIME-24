@@ -1,4 +1,3 @@
-<!--By-Gabriel André Cogo Fernandes-->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -11,36 +10,31 @@
     <div id="login">
 
         <h1>Entrar</h1>
-        <p class = descricao> Acesse sua conta para continuar</p>
+        <p class="descricao"> Acesse sua conta para continuar</p>
 
-        <!-- Div que agrupa os campos e o botão de acesso -->
-        <div class="acesso">
-            
-            <!-- Campo para inserir o email ou telefone -->
+        <form id="formLogin" class="acesso" novalidate>
+
             <div class="caixa-de-entrada">
-                <input type="text" placeholder= "Email ou telefone...">
+                <input type="text" id="usuario" placeholder="Email ou telefone...">
+                <span class="erro" id="erroUsuario"></span>
 
-
-                <!-- Campo para inserir a senha -->
-                <!-- type="password" faz com que os caracteres fiquem ocultos -->
-                <input type="password" placeholder= "Insira a sua senha...">
+                <input type="password" id="senha" placeholder="Insira a sua senha...">
+                <span class="erro" id="erroSenha"></span>
             </div>
 
-            <a href="https://www.rockstargames.com/VI" target="_blank">
-                <button type="button">Acessar</button><br>
-            </a>
-            <br>
-        <a href="../esqueceu a senha/senha.html">Esqueceu a senha?</a>
+            <button type="submit">Acessar</button>
+            <br><br>
 
-        <div class = "cadastro">
-        <p>
-            Novo no sistema?
-        </p>
+            <p id="mensagemSucesso" class="sucesso"></p>
 
-        <!-- Link que leva para a página de cadastro -->
-        <a href="../cadastro/cadastro.html">Cadastre-se</a>
-        </div>
+            <div class="cadastro">
+                <p>
+                    Ola! Tudo bem? Bem vindo ao site
+                </p>
+            </div>
+        </form>
     </div>
-    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
