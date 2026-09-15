@@ -50,6 +50,7 @@ function validarTitulo() {
         return false;
     }
 
+    mostrarErro("erroTitulo", "");
     return true;
 }
 
@@ -82,6 +83,7 @@ function validarDescricao() {
         return false;
     }
 
+    mostrarErro("erroDescricao", "");
     return true;
 }
 
@@ -96,9 +98,9 @@ function validarTipo() {
         return false;
     }
 
+    mostrarErro("erroTipo", "");
     return true;
 }
-
 
 function validarPrioridade() {
     if (prioridade.value === "") {
@@ -106,9 +108,9 @@ function validarPrioridade() {
         return false;
     }
 
+    mostrarErro("erroPrioridade", "");
     return true;
 }
-
 
 function validarStatus() {
     if (status.value === "") {
@@ -116,9 +118,9 @@ function validarStatus() {
         return false;
     }
 
+    mostrarErro("erroStatus", "");
     return true;
 }
-
 
 function validarProjeto() {
     if (projeto.value === "") {
@@ -126,6 +128,7 @@ function validarProjeto() {
         return false;
     }
 
+    mostrarErro("erroProjeto", "");
     return true;
 }
 
@@ -142,16 +145,15 @@ function validarData() {
         return false;
     }
 
-    // Pega a data atual
+    // Obtém a data atual no formato YYYY-MM-DD
     const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoje.getDate()).padStart(2, "0");
 
-    // Remove horas, minutos, segundos e milissegundos
-    hoje.setHours(0, 0, 0, 0);
+    const dataAtual = `${ano}-${mes}-${dia}`;
 
-    // Converte a data selecionada
-    const dataSelecionada = new Date(valor + "T00:00:00");
-
-    if (dataSelecionada < hoje) {
+    if (valor < dataAtual) {
         mostrarErro(
             "erroData",
             "A data limite não pode ser anterior à data atual."
@@ -159,9 +161,70 @@ function validarData() {
         return false;
     }
 
+    mostrarErro("erroData", "");
     return true;
 }
 
+
+// ===============================
+// VALIDAÇÃO COMPLETA
+// ===============================
+
+function validarFormulario() {
+    const tituloValido = validarTitulo();
+    const descricaoValida = validarDescricao();
+    const tipoValido = validarTipo();
+    const prioridadeValida = validarPrioridade();
+    const statusValido = validarStatus();
+    const projetoValido = validarProjeto();
+    const dataValida = validarData();
+
+    return (
+        tituloValido &&
+        descricaoValida &&
+        tipoValido &&
+        prioridadeValida &&
+        statusValido &&
+        projetoValido &&
+        dataValida
+    );
+}
+
+
+// ===============================
+// SUBMIT DO FORMULÁRIO
+// ===============================
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    limparErros();
+
+    if (!validarFormulario()) {
+        return;
+    }
+
+    // Cria objeto com os dados da demanda
+    const demanda = {
+        titulo: titulo.value.trim(),
+        descricao: descricao.value.trim(),
+        tipo: tipo.value,
+        prioridade: prioridade.value,
+        status: status.value,
+        projeto: projeto.value,
+        dataLimite: dataLimite.value
+    };
+
+    // Exibe os dados formatados
+    resultado.textContent = JSON.stringify(demanda, null, 2);
+
+    painelResultado.style.display = "block";
+
+    // Opcional: rola a tela até o resultado
+    painelResultado.scrollIntoView({
+        behavior: "smooth"
+    });
+});
 
 
 // ===============================
@@ -169,14 +232,8 @@ function validarData() {
 // ===============================
 
 btnCancelar.addEventListener("click", function () {
-
-    // Limpa o formulário
     form.reset();
-
-    // Limpa mensagens de erro
     limparErros();
-
-    // Esconde o resultado
     painelResultado.style.display = "none";
 });
 
@@ -187,6 +244,7 @@ btnCancelar.addEventListener("click", function () {
 
 titulo.addEventListener("blur", validarTitulo);
 descricao.addEventListener("blur", validarDescricao);
+
 tipo.addEventListener("change", validarTipo);
 prioridade.addEventListener("change", validarPrioridade);
 status.addEventListener("change", validarStatus);
