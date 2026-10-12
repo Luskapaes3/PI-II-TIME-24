@@ -16,9 +16,24 @@
 
             <div class="caixa-de-entrada">
                 <input type="text" id="usuario" placeholder="Email ou telefone...">
+                <div class="requisitos" id="reqUsuario">
+                    <p>Informe um dos dois:</p>
+                    <ul>
+                        <li id="reqEmail">Um email válido (ex: nome@email.com)</li>
+                        <li id="reqTelefone">Ou um telefone com 10 ou 11 dígitos, só números</li>
+                    </ul>
+                </div>
                 <span class="erro" id="erroUsuario"></span>
 
                 <input type="password" id="senha" placeholder="Insira a sua senha...">
+                <div class="requisitos" id="reqSenha">
+                    <p>A senha deve ter:</p>
+                    <ul>
+                        <li id="reqTamanho">No mínimo 6 caracteres</li>
+                        <li id="reqMaiuscula">Pelo menos uma letra maiúscula</li>
+                        <li id="reqEspecial">Pelo menos um caractere especial (! @ # $ % & *)</li>
+                    </ul>
+                </div>
                 <span class="erro" id="erroSenha"></span>
             </div>
 

@@ -86,3 +86,50 @@ body{
     font-size: 14px;
     font-weight: bold;
 }
+
+/* Caixa de requisitos: começa escondida */
+.requisitos {
+    display: none;
+    font-size: 12px;
+    color: #666;
+    background-color: #f2f6fa;
+    border-left: 3px solid #0067b8;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+/* Quando recebe a classe "visivel", aparece */
+.requisitos.visivel {
+    display: block;
+}
+
+.requisitos p {
+    margin: 0 0 4px 0;
+    font-weight: bold;
+}
+
+.requisitos ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+/* Cada requisito começa cinza, com uma bolinha vazia na frente */
+.requisitos li {
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.requisitos li::before {
+    content: "○ ";
+}
+
+/* Quando o requisito é cumprido, recebe a classe "ok": fica verde com ✓ */
+.requisitos li.ok {
+    color: #2e8b57;
+    font-weight: bold;
+}
+
+.requisitos li.ok::before {
+    content: "✓ ";
+}
