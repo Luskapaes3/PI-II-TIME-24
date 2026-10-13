@@ -1,5 +1,5 @@
 // Autor: Lucas Paes Amaro
-// Dados de teste em memória
+// Dados Ficticios
 export const demandas = [
   { id: 1, titulo: "Corrigir erro de login", descricao: "Erro ao entrar no sistema", tipo: "Defeito", prioridade: "Crítica", status: "Aberta", projeto: "Portal do Aluno", responsavel: "Carla", dataCriacao: "2026-09-20", prazo: "2026-10-16" },
   { id: 2, titulo: "Criar tela de relatórios", descricao: "Gráficos mensais", tipo: "Tarefa", prioridade: "Alta", status: "Em andamento", projeto: "Sistema Financeiro", responsavel: "Bruno", dataCriacao: "2026-09-22", prazo: "2026-10-30" },
