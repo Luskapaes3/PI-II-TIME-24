@@ -1,90 +1,203 @@
-<!--By-Bernardo Garcia Barbosa-->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashboardPI</title>
-    <link rel="stylesheet" href="style3.css"> 
+    <title>Dashboard PI</title>
+    <link rel="stylesheet" href="style3.css">
 </head>
+
 <body>
-    <!--Cabeçalho-->
-    <div class="cabeçalho">
-        <h1>Dashboard</h1>
-    </div>
-    <!--Junta o menu lateral e os indicadores de demanda-->
+
+    <!-- Cabeçalho e logo -->
+    <header class="cabecalho">
+
+        <div class="area-logo">
+            <img src="Logo.png" alt="Logo do sistema">
+        </div>
+
+        <div class="titulo-dashboard">
+            <h1>Dashboard</h1>
+        </div>
+
+        <div class="cargo-usuario">
+            Cargo: <strong id="cargoUsuario">Administrador</strong>
+        </div>
+
+    </header>
+
+    <!-- Menu lateral e conteúdo -->
     <div class="conteudo">
-        <!--Menu lateral-->
-        <div class="leftmenu">
-            <h2><a href="#">Cadastrar uma demanda</a></h2>
-            <h2><a href="#">Lista de demandas</a></h2>  
-            <h2><a href="#">Detalhes das demandas</a></h2>
-            <h2><a href="#">Perfil</a></h2>
-        </div>
-        <div class="demandas">
-            <div class="demanda">
-                <h3>Total</h3>
-                <p>128</p>
-            </div>
-            <div class="demanda">
-                <h3>Abertas</h3>
-                <p>32</p>
-            </div>
-            <div class="demanda">
-                <h3>Andamento</h3>
-                <p>41</p>
-            </div>
-            <div class="demanda">
-                <h3>Revisão</h3>
-                <p>18</p>
-            </div>
-            <div class="demanda">
-                <h3>Concluídas</h3>
-                <p>29</p>
-            </div>
-            <div class="demanda">
-                <h3>Canceladas</h3>
-                <p>8</p>
-            </div>
-        </div>
+
+        <!-- Menu lateral -->
+        <nav class="leftmenu">
+            <a href="#" class="ativo">Dashboard</a>
+            <a href="#">Cadastrar uma demanda</a>
+            <a href="#">Lista de demandas</a>
+            <a href="#">Detalhes das demandas</a>
+            <a href="#">Perfil</a>
+        </nav>
+
+        <!-- Conteúdo principal -->
+        <main class="principal">
+
+            <!-- Indicadores -->
+            <section class="demandas">
+
+                <div class="demanda">
+                    <h3>Total</h3>
+                    <p id="total">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Abertas</h3>
+                    <p id="abertas">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Andamento</h3>
+                    <p id="emAndamento">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Revisão</h3>
+                    <p id="emRevisao">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Concluídas</h3>
+                    <p id="concluidas">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Canceladas</h3>
+                    <p id="canceladas">0</p>
+                </div>
+
+            </section>
+
+            <!-- Informações detalhadas -->
+            <section class="infodemanda">
+
+                <div class="prioridade">
+                    <h3>Demandas por prioridade</h3>
+                    <ul>
+                        <li>Crítica -- <span id="prioridadeCritica">0</span></li>
+                        <li>Alta -- <span id="prioridadeAlta">0</span></li>
+                        <li>Média -- <span id="prioridadeMedia">0</span></li>
+                        <li>Baixa -- <span id="prioridadeBaixa">0</span></li>
+                    </ul>
+                </div>
+
+                <div class="tipodademanda">
+                    <h3>Demandas por tipo</h3>
+                    <ul>
+                        <li>Tarefa -- <span id="tipoTarefa">0</span></li>
+                        <li>Defeito -- <span id="tipoDefeito">0</span></li>
+                        <li>Melhoria -- <span id="tipoMelhoria">0</span></li>
+                        <li>Documentação -- <span id="tipoDocumentacao">0</span></li>
+                    </ul>
+                </div>
+
+                <div class="criticas">
+                    <h3>Demandas críticas em aberto</h3>
+                    <ul id="listaCriticas">
+                        <li>Carregando demandas...</li>
+                    </ul>
+                </div>
+
+                <div class="ending">
+                    <h3>Demandas próximas do prazo</h3>
+                    <ul id="listaPrazos">
+                        <li>Carregando demandas...</li>
+                    </ul>
+                </div>
+
+            </section>
+
+        </main>
     </div>
-    <!--área com informacoes mais detalhadas sobre as demandas-->
-    <div class="infodemanda">
-            <div class="prioridade">
-                <h3>Demandas por prioridade</h3>
-                <ul>
-                    <li>Crítica -- 16</li>
-                    <li>Alta -- 32</li>
-                    <li>Média -- 48</li>
-                    <li>Baixa -- 32</li>
-                </ul>
-            </div>
-            <div class="tipodademanda">
-                <h3>Demandas por tipo</h3>
-                <ul>
-                    <li>Tarefa -- 54</li>
-                    <li>Defeito -- 28</li>
-                    <li>Melhoria -- 31</li>
-                    <li>Documentação -- 15</li>
-                </ul>   
-            </div>
-            <div class="criticas">
-                <h3>Demandas críticas em aberto</h3>
-                <ul>
-                    <li>Erro no sistema de login</li>
-                    <li>Falha no pagamento</li>
-                    <li>Servidor indisponível</li>
-                </ul>   
-            </div>
-            <div class="ending">
-                <h3>Demandas próximas do prazo</h3>
-                <ul>
-                    <li>Implemtar sistema de login -- 06/09/2026</li>
-                    <li>Corrigir erro no cadastro -- 07/09/2026</li>
-                    <li>Criar documentação da API -- 07/09/2026</li>
-                </ul> 
-            </div>
-        </div>
-    <hr>
+
+    <script>
+        async function carregarDashboard() {
+            try {
+                const resposta = await fetch("http://localhost:3000/dashboard");
+
+                if (!resposta.ok) {
+                    throw new Error("Não foi possível carregar os dados.");
+                }
+
+                const dados = await resposta.json();
+
+                // Atualizar indicadores
+                document.getElementById("total").textContent = dados.total;
+                document.getElementById("abertas").textContent = dados.abertas;
+                document.getElementById("emAndamento").textContent = dados.emAndamento;
+                document.getElementById("emRevisao").textContent = dados.emRevisao;
+                document.getElementById("concluidas").textContent = dados.concluidas;
+                document.getElementById("canceladas").textContent = dados.canceladas;
+
+                // Demandas por prioridade
+                document.getElementById("prioridadeCritica").textContent = dados.porPrioridade.critica;
+                document.getElementById("prioridadeAlta").textContent = dados.porPrioridade.alta;
+                document.getElementById("prioridadeMedia").textContent = dados.porPrioridade.media;
+                document.getElementById("prioridadeBaixa").textContent = dados.porPrioridade.baixa;
+
+                // Demandas por tipo
+                document.getElementById("tipoTarefa").textContent = dados.porTipo.tarefa;
+                document.getElementById("tipoDefeito").textContent = dados.porTipo.defeito;
+                document.getElementById("tipoMelhoria").textContent = dados.porTipo.melhoria;
+                document.getElementById("tipoDocumentacao").textContent = dados.porTipo.documentacao;
+
+                // Demandas críticas
+                const listaCriticas = document.getElementById("listaCriticas");
+                listaCriticas.innerHTML = "";
+
+                if (dados.criticasEmAberto.length === 0) {
+                    const item = document.createElement("li");
+                    item.textContent = "Nenhuma demanda crítica em aberto.";
+                    listaCriticas.appendChild(item);
+                } else {
+                    dados.criticasEmAberto.forEach(demanda => {
+                        const item = document.createElement("li");
+                        item.textContent = demanda.titulo;
+                        listaCriticas.appendChild(item);
+                    });
+                }
+
+                // Demandas próximas do prazo
+                const listaPrazos = document.getElementById("listaPrazos");
+                listaPrazos.innerHTML = "";
+
+                if (dados.demandasProximasDoPrazo.length === 0) {
+                    const item = document.createElement("li");
+                    item.textContent = "Nenhuma demanda próxima do prazo.";
+                    listaPrazos.appendChild(item);
+                } else {
+                    dados.demandasProximasDoPrazo.forEach(demanda => {
+                        const item = document.createElement("li");
+                        const data = new Date(demanda.prazo + "T12:00:00");
+                        const prazoFormatado = data.toLocaleDateString("pt-BR");
+
+                        item.textContent = `${demanda.titulo} — Prazo: ${prazoFormatado}`;
+                        listaPrazos.appendChild(item);
+                    });
+                }
+
+            } catch (erro) {
+                console.error("Erro ao carregar o Dashboard:", erro);
+
+                document.getElementById("listaCriticas").innerHTML =
+                    "<li>Erro ao carregar as demandas.</li>";
+
+                document.getElementById("listaPrazos").innerHTML =
+                    "<li>Erro ao carregar os prazos.</li>";
+            }
+        }
+
+        carregarDashboard();
+    </script>
+
 </body>
 </html>
