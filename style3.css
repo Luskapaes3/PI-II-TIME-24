@@ -1,104 +1,251 @@
-/*By-Bernardo Garcia Barbosa*/ 
-/*DashboardPI*/
-/* Config geral da pagina */
+
+/* By-Bernardo Garcia Barbosa */
+/* DashboardPI */
+
+/* Configuração geral */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #cacbcc;
-    color: black;
+    background-color: #f4f4f4;
+    color: #222;
 }
-/* Config o cabeçalho do Dashboard, definindo seu tamanho, cor e
-centralizando o título horizontal e verticalmente */
-.cabeçalho {
-    width: 100;
-    height: 80px;
-    background-color: blue;
+
+/* Cabeçalho */
+.cabecalho {
+    height: 110px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Área do logo */
+.area-logo {
+    width: 255px;
+    height: 110px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    border-right: 1px solid #ddd;
 }
-/* Organiza o conteudo principal da pagina, colocando o menu lateral
-e a área das demandas lado a lado */
+
+.area-logo img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+}
+
+/* Título do dashboard */
+.titulo-dashboard {
+    flex: 1;
+    padding: 20px 25px;
+}
+
+.titulo-dashboard h1 {
+    margin: 0;
+    font-size: 30px;
+    color: #0056b3;
+}
+
+.titulo-dashboard p {
+    margin: 5px 0 0;
+    font-size: 15px;
+    color: #555;
+}
+
+/* Cargo do usuário */
+.cargo-usuario {
+    margin-right: 25px;
+    padding: 12px 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 15px;
+}
+
+.cargo-usuario strong {
+    color: #0056b3;
+}
+
+/* Conteúdo principal */
 .conteudo {
     display: flex;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 110px);
 }
-/* config do menu lateral, seu tamanho, cor de fundo, espaçamento interno
-e uma borda para separar da página */
+
+/* Menu lateral */
 .leftmenu {
-    width: 220px;
-    min-height: calc(100vh - 80px);
-    background-color: #6c96b8;
-    padding: 20px 15px;
-    border-right: 2px solid blue;
+    width: 255px;
+    flex-shrink: 0;
+    background-color: white;
+    border-right: 1px solid #ddd;
+    padding: 20px 10px;
 }
-/* Espacamento dos titulos */
-.leftmenu h2 {
-    margin: 0 0 10px 0;
-}
-/* aparencia e tamanho da area clicavel do link */
+
+/* Links do menu */
 .leftmenu a {
     display: block;
-    padding: 12px 15px;
-    color: white;
+    padding: 16px 18px;
+    margin-bottom: 5px;
+    color: #222;
     text-decoration: none;
-    border-radius: 8px;
+    font-size: 15px;
+    border-radius: 4px;
 }
-/* cor do fundo do link */
+
+/* Efeito ao passar o mouse */
 .leftmenu a:hover {
-    background-color: #cacbcc;
+    background-color: #edf4fd;
+    color: #0056b3;
 }
-/* organiza as demandas em counas */
-.demandas {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 30px;
-}
-/* aparencia dos cards das demandas */
-.demanda {
-    background-color: white;
-    border-radius: 5%;
-    overflow: hidden;
-}
-/* titulos dos cards */
-.demanda h3 {
-    margin: 0;
-    padding: 20px 20px 5px 20px;
-    font-size: 16px;
-    color: blue;
-}
-/* numeros dos cards */
-.demanda p {
-    margin: 0;
-    padding: 135px 20px 20px 20px;
-    font-size: 32px;
+
+/* Página selecionada */
+.leftmenu a.ativo {
+    background-color: #e5f1fc;
+    color: #0056b3;
     font-weight: bold;
 }
-/* organiza em 2 colunas as informacoes das demandas */
+
+/* Área principal */
+.principal {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+}
+
+/* Grid dos indicadores */
+.demandas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+/* Cards de status */
+.demanda {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 24px;
+    min-height: 135px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Títulos dos cards */
+.demanda h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+/* Números dos cards */
+.demanda p {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: #111;
+}
+
+/* Grid das informações */
 .infodemanda {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    padding: 30px;
 }
-/* define a aparencia dos cards das informacoes das demandas */
+
+/* Cards das informações */
 .prioridade,
 .tipodademanda,
 .criticas,
 .ending {
     background-color: white;
-    padding: 20px;
-    border-radius: 5%;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 22px;
+    min-height: 155px;
 }
-/* titulos dos cards */
+
+/* Títulos das informações */
 .infodemanda h3 {
-    margin-top: 0;
-    color: blue;
+    margin: 0 0 15px 0;
+    padding-bottom: 12px;
+    color: #0056b3;
+    font-size: 19px;
+    border-bottom: 1px solid #ddd;
 }
-/* espaco entre as listas pra melhorar a visualização */
+
+/* Listas */
+.infodemanda ul {
+    margin: 0;
+    padding-left: 30px;
+}
+
 .infodemanda li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Números das listas */
+.infodemanda span {
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 1100px) {
+    .demandas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 750px) {
+    .cabecalho {
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    .area-logo {
+        width: 110px;
+        border-right: none;
+    }
+
+    .titulo-dashboard {
+        padding: 15px;
+    }
+
+    .titulo-dashboard h1 {
+        font-size: 24px;
+    }
+
+    .cargo-usuario {
+        margin: 0 15px 15px;
+    }
+
+    .conteudo {
+        flex-direction: column;
+    }
+
+    .leftmenu {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .principal {
+        padding: 20px;
+    }
+
+    .demandas,
+    .infodemanda {
+        grid-template-columns: 1fr;
+    }
 }
