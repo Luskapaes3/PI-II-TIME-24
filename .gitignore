@@ -1,0 +1,9 @@
+#Lucas Paes Amaro
+
+#as bibliotecas baixadas (baixa via terminal em cada pc)
+node_modules/ 
+
+# guarda as cfg do servidor (individual, todo mundo faz com o proprio servidor)
+.env
+
+dist/
