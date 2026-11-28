@@ -1,4 +1,4 @@
-<!-- Autor: Matheus Misumi -->
+<!-- Autor: Matheus Yudi Misumi -->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Demanda</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="detalhes.css">
 </head>
 <body>
 
 <!-- topo com titulo e botao de voltar -->
     <div id="cabecalho">
         <div>
-            <h1>Detalhes da Demanda #1405</h1>
+            <h1 id="titulo-demanda">Detalhes da Demanda #1405</h1>
             <p>Visualização completa e acompanhamento das informações da demanda.</p>
         </div>
-        <a href="../listagem/listagem.html" class="btn-voltar">Voltar para a Listagem</a>
+        <a href="/pages/listagem.html" class="btn-voltar">Voltar para a Listagem</a>
     </div>
 
 <!-- bloco principal -->
@@ -26,7 +26,7 @@
         <div class="header-demanda">
             <h2>Ajuste no sistema do AgendaFacil</h2>
             <div class="badges">
-                <span class="badge status-andamento">Em andamento</span>
+                <span id="status-demanda" class="badge status-andamento">Em andamento</span>
                 <span class="badge prioridade-critica">Crítica</span>
             </div>
         </div>
@@ -62,7 +62,7 @@
         <!-- texto explicativo do problema -->
         <div class="secao">
             <h3>Descrição da Demanda</h3>
-            <p>
+            <p id="descricao-demanda">
                 O usuário relatou instabilidade ao tentar agendar um atendimento no sistema AgendaFacil. 
                 Durante o envio do formulário de agendamento, ocorre uma falha na confirmação e o horário acaba não sendo reservado no banco de dados.
             </p>
@@ -94,6 +94,20 @@
             </table>
         </div>
 
+        <!-- caixa de erro exigida pelo professor -->
+        <div id="erro-box" style="display: none; background: #ffebee; color: #c62828; padding: 10px; margin-bottom: 15px; border: 1px solid #ef9a9a;"></div>
+
+        <!-- secção de comentários -->
+        <div class="secao">
+            <h3>Comentários</h3>
+            <ul id="lista-comentarios" style="list-style: none; padding: 0; margin-bottom: 15px;"></ul>
+
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="input-comentario" placeholder="Escreve um comentário..." style="flex: 1; padding: 8px; border: 1px solid #ccc;">
+                <button id="btn-enviar-comentario" class="btn-principal" type="button">Enviar</button>
+            </div>
+        </div>        
+
         <div class="botoes-acao">
             <button class="btn-secundario" type="button">Editar Demanda</button>
             <button class="btn-principal" type="button">Concluir Demanda</button>
@@ -106,5 +120,7 @@
         <p>© Sistema de Gerenciamento de Demandas</p>
     </div>
 
+    
+    <script src="/js/detalhes.js"></script>
 </body>
 </html>

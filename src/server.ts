@@ -1,19 +1,30 @@
-// Autor: Matheus Misumi
-import express, { Request, Response } from "express";
-import demandasRoutes from "./routes/demandas";
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import { initPool, closePool } from "./db";
+import demandasRouter from "./routes/detalhes";
 
 const app = express();
-
 app.use(express.json());
+app.use(cors());
 
-// Rota de teste
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ mensagem: "Servidor a funcionar!" });
-});
+// As tuas rotas
+app.use(demandasRouter);
 
-// Usar as rotas
-app.use("/demandas", demandasRoutes);
+const PORT = Number(process.env.PORT ?? 3000);
 
-app.listen(3000, () => {
-  console.log("Servidor rodando em http://localhost:3000");
-});
+async function iniciarServidor() {
+  try {
+    await initPool();
+    app.listen(PORT, () => {
+      console.log(`Servidor ativo na porta ${PORT}`);
+    });
+    process.on("SIGINT", async () => { await closePool(); process.exit(0); });
+    process.on("SIGTERM", async () => { await closePool(); process.exit(0); });
+  } catch (erro) {
+    console.error("Falha ao iniciar o servidor:", erro);
+    process.exit(1);
+  }
+}
+
+iniciarServidor();
