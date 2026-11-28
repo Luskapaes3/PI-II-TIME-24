@@ -1,0 +1,126 @@
+<!-- Autor: Matheus Yudi Misumi -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Demanda</title>
+    <link rel="stylesheet" href="/css/detalhes.css">
+</head>
+<body>
+
+<!-- topo com titulo e botao de voltar -->
+    <div id="cabecalho">
+        <div>
+            <h1 id="titulo-demanda">Detalhes da Demanda #1405</h1>
+            <p>Visualização completa e acompanhamento das informações da demanda.</p>
+        </div>
+        <a href="/pages/listagem.html" class="btn-voltar">Voltar para a Listagem</a>
+    </div>
+
+<!-- bloco principal -->
+    <div class="conteudo-principal">
+
+        <!-- titulo do chamado e as tags de status/prioridade -->
+        <div class="header-demanda">
+            <h2>Ajuste no sistema do AgendaFacil</h2>
+            <div class="badges">
+                <span id="status-demanda" class="badge status-andamento">Em andamento</span>
+                <span class="badge prioridade-critica">Crítica</span>
+            </div>
+        </div>
+
+        <!-- caixas com as informacoes gerais da demanda -->
+        <div class="caixa-info">
+            <div class="info-item">
+                <strong>Tipo de Demanda:</strong>
+                <p>Defeito</p>
+            </div>
+            <div class="info-item">
+                <strong>Projeto Associado:</strong>
+                <p>Módulo de Agendamentos</p>
+            </div>
+            <div class="info-item">
+                <strong>Solicitante:</strong>
+                <p>Gabriel Cogo</p>
+            </div>
+            <div class="info-item">
+                <strong>Responsável:</strong>
+                <p>Matheus Misumi</p>
+            </div>
+            <div class="info-item">
+                <strong>Data de Criação:</strong>
+                <p>30/08/2026</p>
+            </div>
+            <div class="info-item">
+                <strong>Prazo de Finalização:</strong>
+                <p>31/10/2026</p>
+            </div>
+        </div>
+
+        <!-- texto explicativo do problema -->
+        <div class="secao">
+            <h3>Descrição da Demanda</h3>
+            <p id="descricao-demanda">
+                O usuário relatou instabilidade ao tentar agendar um atendimento no sistema AgendaFacil. 
+                Durante o envio do formulário de agendamento, ocorre uma falha na confirmação e o horário acaba não sendo reservado no banco de dados.
+            </p>
+        </div>
+
+        <!-- tabela pra mostrar o historico de atualizacoes -->
+        <div class="secao">
+            <h3>Histórico e Observações</h3>
+            <table class="tabela-historico">
+                <thead>
+                    <tr>
+                        <th>Data/Hora</th>
+                        <th>Usuário</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>30/08/2026 14:30</td>
+                        <td>Matheus Misumi</td>
+                        <td>Análise iniciada. Reproduzido erro de validação ao salvar a reserva de horário.</td>
+                    </tr>
+                    <tr>
+                        <td>31/08/2026 09:15</td>
+                        <td>Gabriel Cogo</td>
+                        <td>Prioridade confirmada. Ajuste necessário na regra de verificação de disponibilidade.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- caixa de erro exigida pelo professor -->
+        <div id="erro-box" style="display: none; background: #ffebee; color: #c62828; padding: 10px; margin-bottom: 15px; border: 1px solid #ef9a9a;"></div>
+
+        <!-- secção de comentários -->
+        <div class="secao">
+            <h3>Comentários</h3>
+            <ul id="lista-comentarios" style="list-style: none; padding: 0; margin-bottom: 15px;"></ul>
+
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="input-comentario" placeholder="Escreve um comentário..." style="flex: 1; padding: 8px; border: 1px solid #ccc;">
+                <button id="btn-enviar-comentario" class="btn-principal" type="button">Enviar</button>
+            </div>
+        </div>        
+
+        <div class="botoes-acao">
+            <button class="btn-secundario" type="button">Editar Demanda</button>
+            <button class="btn-principal" type="button">Concluir Demanda</button>
+        </div>
+
+    </div>
+
+    <!-- rodape basico -->
+    <div id="rodape">
+        <p>© Sistema de Gerenciamento de Demandas</p>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/detalhes.js"></script>
+</body>
+</html>
