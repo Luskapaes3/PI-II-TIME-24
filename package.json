@@ -1,0 +1,21 @@
+{
+  "name": "pi2-api",
+  "version": "1.0.0",
+  "description": "API do Sistema de Acompanhamento de Demandas de Desenvolvimento (PI2)",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

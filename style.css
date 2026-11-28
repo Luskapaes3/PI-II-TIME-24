@@ -1,0 +1,135 @@
+body{
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    /* Define a altura mínima da página */
+    min-height: 90vh;
+
+
+    background: linear-gradient(to left, #cacbcc, #6c96b8);
+}
+
+#login {
+    width: 350px;
+    padding: 30px;
+    border: 2px solid #6c96b8;
+    border-radius: 2px;
+
+    /* Adiciona uma sombra ao redor da caixa */
+    background-color: white;
+
+    /* Adiciona uma sombra ao redor da caixa */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.descricao {
+    font-size: 14px;
+    color: #808080;
+    margin-bottom: 25px;
+}
+
+.caixa-de-entrada input{
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 20px;
+
+    /* Remove a borda padrão do campo */
+    border: none;
+
+    /* Adiciona apenas uma borda na parte inferior */
+    border-bottom: 1px solid #666;
+
+    /* Remove o contorno padrão quando o campo é selecionado */
+    outline: none;
+
+    background: transparent;
+    font-size: 16px;
+}
+
+/* Altera a aparência do campo quando ele é selecionado */
+.caixa-de-entrada input:focus{
+    /* Muda a cor e aumenta a espessura da borda inferior */
+    border-bottom: 2px solid #0067b8;
+}
+
+.acesso button {
+    background-color: #0067b8;
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.acesso button:hover {
+    background-color: #005da6;
+}
+
+.caixa-de-entrada input.is-invalid{
+    border-bottom: 2px solid #d9534f;
+}
+
+.erro{
+    display: block;
+    color: #d9534f;
+    font-size: 12px;
+    min-height: 14px;
+    margin-bottom: 12px;
+}
+
+.sucesso{
+    color: #6cb6c0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Caixa de requisitos: começa escondida */
+.requisitos {
+    display: none;
+    font-size: 12px;
+    color: #666;
+    background-color: #f2f6fa;
+    border-left: 3px solid #0067b8;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+/* Quando recebe a classe "visivel", aparece */
+.requisitos.visivel {
+    display: block;
+}
+
+.requisitos p {
+    margin: 0 0 4px 0;
+    font-weight: bold;
+}
+
+.requisitos ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+/* Cada requisito começa cinza, com uma bolinha vazia na frente */
+.requisitos li {
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.requisitos li::before {
+    content: "○ ";
+}
+
+/* Quando o requisito é cumprido, recebe a classe "ok": fica verde com ✓ */
+.requisitos li.ok {
+    color: #2e8b57;
+    font-weight: bold;
+}
+
+.requisitos li.ok::before {
+    content: "✓ ";
+}
