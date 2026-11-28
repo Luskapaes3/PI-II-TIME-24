@@ -25,7 +25,7 @@
         </div>
 
         <div class="cargo-usuario">
-            Cargo: <strong id="cargoUsuario">Administrador</strong>
+            Cargo: <strong id="cargoUsuario">Carregando...</strong>
         </div>
 
     </header>
@@ -125,22 +125,31 @@
         </main>
     </div>
 
+    <!-- Arquivo de autenticação do sistema -->
+    <script src="/js/auth.js"></script>
+
     <script>
+
+        // Verifica se o usuario está logado
+        exigirLogin();
+
+        // Pega os dados do usuario logado
+        const usuario = obterUsuario();
 
         // Função que busca os dados da API e coloca eles na tela
         async function carregarDashboard() {
             try {
 
-                // Busca os dados na rota do dashboard do servidor
-                const resposta = await fetch("/dashboard");
+                // Busca os dados usando a função do auth.js
+                const resposta = await chamarApi("/dashboard");
 
                 // Verifica se ocorreu algum erro na requisição
                 if (!resposta.ok) {
                     throw new Error("Não foi possível carregar os dados.");
                 }
 
-                // Converte a resposta para JSON para conseguir acessar os dados
-                const dados = await resposta.json();
+                // Pega os dados retornados pela API
+                const dados = resposta.dados;
 
                 // Atualiza os valores dos cards usando os ids do HTML
                 document.getElementById("total").textContent = dados.total;
@@ -218,8 +227,13 @@
             }
         }
 
-        // Chama a função assim que a página é aberta
-        carregarDashboard();
+        // Mostra o cargo e carrega o dashboard somente se estiver logado
+        if (usuario) {
+            document.getElementById("cargoUsuario").textContent =
+                usuario.perfil || "Não informado";
+
+            carregarDashboard();
+        }
 
     </script>
 
