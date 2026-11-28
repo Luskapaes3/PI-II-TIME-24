@@ -1,4 +1,4 @@
-/* Autor: [Gabriel André Cogo Fernandes]*/
+/* Autor: Gabriel André Cogo Fernandes*/
 
 export type Perfil = "Administrador" | "Líder de Projeto" | "Membro da Equipe";
 
