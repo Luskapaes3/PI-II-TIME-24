@@ -1,0 +1,227 @@
+<!-- Autor: Bernardo Garcia Barbosa -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard PI</title>
+
+    <!-- CSS do dashboard -->
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Parte superior da tela, onde fica o logo, titulo e cargo do usuario -->
+    <header class="cabecalho">
+
+        <div class="area-logo">
+            <img src="/img/logo.jpeg" alt="Logo do sistema">
+        </div>
+
+        <div class="titulo-dashboard">
+            <h1>Dashboard</h1>
+        </div>
+
+        <div class="cargo-usuario">
+            Cargo: <strong id="cargoUsuario">Administrador</strong>
+        </div>
+
+    </header>
+
+    <div class="conteudo">
+
+        <!-- Menu lateral para acessar as outras telas do sistema -->
+        <nav class="leftmenu">
+            <a href="/pages/dashboard.html" class="ativo">Dashboard</a>
+            <a href="/pages/cadastro.html">Cadastrar uma demanda</a>
+            <a href="/pages/listagem.html">Lista de demandas</a>
+            <a href="/pages/detalhes.html">Detalhes das demandas</a>
+            <a href="#">Perfil</a>
+        </nav>
+
+        <main class="principal">
+
+            <!-- Cards que mostram a quantidade de demandas de cada status -->
+            <!-- Os valores começam em 0 e depois são atualizados pela API -->
+            <section class="demandas">
+
+                <div class="demanda">
+                    <h3>Total</h3>
+                    <p id="total">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Abertas</h3>
+                    <p id="abertas">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Andamento</h3>
+                    <p id="emAndamento">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Revisão</h3>
+                    <p id="emRevisao">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Concluídas</h3>
+                    <p id="concluidas">0</p>
+                </div>
+
+                <div class="demanda">
+                    <h3>Canceladas</h3>
+                    <p id="canceladas">0</p>
+                </div>
+
+            </section>
+
+            <!-- Parte inferior do dashboard com mais informações das demandas -->
+            <section class="infodemanda">
+
+                <!-- Quantidade de demandas separadas por prioridade -->
+                <div class="prioridade">
+                    <h3>Demandas por prioridade</h3>
+                    <ul>
+                        <li>Crítica -- <span id="prioridadeCritica">0</span></li>
+                        <li>Alta -- <span id="prioridadeAlta">0</span></li>
+                        <li>Média -- <span id="prioridadeMedia">0</span></li>
+                        <li>Baixa -- <span id="prioridadeBaixa">0</span></li>
+                    </ul>
+                </div>
+
+                <!-- Quantidade de demandas separadas por tipo -->
+                <div class="tipodademanda">
+                    <h3>Demandas por tipo</h3>
+                    <ul>
+                        <li>Tarefa -- <span id="tipoTarefa">0</span></li>
+                        <li>Defeito -- <span id="tipoDefeito">0</span></li>
+                        <li>Melhoria -- <span id="tipoMelhoria">0</span></li>
+                        <li>Documentação -- <span id="tipoDocumentacao">0</span></li>
+                    </ul>
+                </div>
+
+                <!-- Lista das demandas criticas que ainda não foram finalizadas -->
+                <div class="criticas">
+                    <h3>Demandas críticas em aberto</h3>
+                    <ul id="listaCriticas">
+                        <li>Carregando demandas...</li>
+                    </ul>
+                </div>
+
+                <!-- Lista das demandas que estão perto do prazo final -->
+                <div class="ending">
+                    <h3>Demandas próximas do prazo</h3>
+                    <ul id="listaPrazos">
+                        <li>Carregando demandas...</li>
+                    </ul>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+
+        // Função que busca os dados da API e coloca eles na tela
+        async function carregarDashboard() {
+            try {
+
+                // Busca os dados na rota do dashboard do servidor
+                const resposta = await fetch("/dashboard");
+
+                // Verifica se ocorreu algum erro na requisição
+                if (!resposta.ok) {
+                    throw new Error("Não foi possível carregar os dados.");
+                }
+
+                // Converte a resposta para JSON para conseguir acessar os dados
+                const dados = await resposta.json();
+
+                // Atualiza os valores dos cards usando os ids do HTML
+                document.getElementById("total").textContent = dados.total;
+                document.getElementById("abertas").textContent = dados.abertas;
+                document.getElementById("emAndamento").textContent = dados.emAndamento;
+                document.getElementById("emRevisao").textContent = dados.emRevisao;
+                document.getElementById("concluidas").textContent = dados.concluidas;
+                document.getElementById("canceladas").textContent = dados.canceladas;
+
+                // Atualiza a quantidade de demandas de cada prioridade
+                document.getElementById("prioridadeCritica").textContent = dados.porPrioridade.critica;
+                document.getElementById("prioridadeAlta").textContent = dados.porPrioridade.alta;
+                document.getElementById("prioridadeMedia").textContent = dados.porPrioridade.media;
+                document.getElementById("prioridadeBaixa").textContent = dados.porPrioridade.baixa;
+
+                // Faz a mesma coisa, mas agora com os tipos de demanda
+                document.getElementById("tipoTarefa").textContent = dados.porTipo.tarefa;
+                document.getElementById("tipoDefeito").textContent = dados.porTipo.defeito;
+                document.getElementById("tipoMelhoria").textContent = dados.porTipo.melhoria;
+                document.getElementById("tipoDocumentacao").textContent = dados.porTipo.documentacao;
+
+                // Pega a lista de demandas criticas e limpa o conteúdo anterior
+                const listaCriticas = document.getElementById("listaCriticas");
+                listaCriticas.innerHTML = "";
+
+                // Se a lista estiver vazia, mostra uma mensagem
+                if (dados.criticasEmAberto.length === 0) {
+                    const item = document.createElement("li");
+                    item.textContent = "Nenhuma demanda crítica em aberto.";
+                    listaCriticas.appendChild(item);
+                } else {
+
+                    // Percorre as demandas e adiciona cada uma na lista do HTML
+                    dados.criticasEmAberto.forEach(demanda => {
+                        const item = document.createElement("li");
+                        item.textContent = demanda.titulo;
+                        listaCriticas.appendChild(item);
+                    });
+                }
+
+                // Limpa a lista de prazos antes de colocar os dados recebidos
+                const listaPrazos = document.getElementById("listaPrazos");
+                listaPrazos.innerHTML = "";
+
+                if (dados.demandasProximasDoPrazo.length === 0) {
+                    const item = document.createElement("li");
+                    item.textContent = "Nenhuma demanda próxima do prazo.";
+                    listaPrazos.appendChild(item);
+                } else {
+
+                    // Percorre as demandas próximas do prazo
+                    dados.demandasProximasDoPrazo.forEach(demanda => {
+                        const item = document.createElement("li");
+
+                        // Coloca a data no formato brasileiro (dia/mes/ano)
+                        const data = new Date(demanda.prazo + "T12:00:00");
+                        const prazoFormatado = data.toLocaleDateString("pt-BR");
+
+                        // Mostra o titulo da demanda junto com seu prazo
+                        item.textContent = `${demanda.titulo} — Prazo: ${prazoFormatado}`;
+                        listaPrazos.appendChild(item);
+                    });
+                }
+
+            } catch (erro) {
+
+                // Caso não consiga buscar os dados, mostra o erro no console e na tela
+                console.error("Erro ao carregar o Dashboard:", erro);
+
+                document.getElementById("listaCriticas").innerHTML =
+                    "<li>Erro ao carregar as demandas.</li>";
+
+                document.getElementById("listaPrazos").innerHTML =
+                    "<li>Erro ao carregar os prazos.</li>";
+            }
+        }
+
+        // Chama a função assim que a página é aberta
+        carregarDashboard();
+
+    </script>
+
+</body>
+</html>
