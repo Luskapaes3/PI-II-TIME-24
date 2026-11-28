@@ -36,6 +36,32 @@
 
                 <div class="linha">
                     <div class="campo">
+                        <label for="tipo">Tipo da demanda</label>
+                        <select id="tipo" required>
+                            <option value="">Selecione</option>
+                            <option value="Tarefa">Tarefa</option>
+                            <option value="Defeito">Defeito</option>
+                            <option value="Melhoria">Melhoria</option>
+                            <option value="Documentação">Documentação</option>
+                        </select>
+                        <div id="erroTipo" class="erro"></div>
+                    </div>
+
+                    <div class="campo">
+                        <label for="prioridade">Prioridade</label>
+                        <select id="prioridade" required>
+                            <option value="">Selecione</option>
+                            <option value="Baixa">Baixa</option>
+                            <option value="Média">Média</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Crítica">Crítica</option>
+                        </select>
+                        <div id="erroPrioridade" class="erro"></div>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo">
                         <label for="projeto">Projeto associado</label>
                         <select id="projeto" required>
                             <option value="">Selecione</option>
@@ -53,53 +79,6 @@
                         <input type="date" id="dataLimite" required>
                         <div id="erroData" class="erro"></div>
                     </div>
-                </div>
-
-                    <div class="campo">
-                        <label for="prioridade">Prioridade</label>
-                        <select id="prioridade" required>
-                            <option value="">Selecione</option>
-                            <option value="Baixa">Baixa</option>
-                            <option value="Média">Média</option>
-                            <option value="Alta">Alta</option>
-                            <option value="Crítica">Crítica</option>
-                        </select>
-                        <div id="erroPrioridade" class="erro"></div>
-                    </div>
-                </div>
-
-                <div class="linha">
-                    <div class="campo">
-                        <label for="status">Status</label>
-                        <select id="status" required>
-                            <option value="">Selecione</option>
-                            <option value="aberta">Aberta</option>
-                            <option value="andamento">Em andamento</option>
-                            <option value="revisao">Em revisão</option>
-                            <option value="concluida">Concluída</option>
-                            <option value="cancelada">Cancelada</option>
-                        </select>
-                        <div id="erroStatus" class="erro"></div>
-                    </div>
-
-                    <div class="campo">
-                        <label for="projeto">Projeto associado</label>
-                        <select id="projeto" required>
-                            <option value="">Selecione</option>
-                            <option value="1">Portal do Aluno</option>
-                            <option value="2">Sistema Financeiro</option>
-                            <option value="3">Aplicativo Mobile</option>
-                            <option value="4">Sistema de Estoque</option>
-                            <option value="5">Plataforma EAD</option>
-                        </select>
-                        <div id="erroProjeto" class="erro"></div>
-                    </div>
-                </div>
-
-                <div class="campo campo-data">
-                    <label for="dataLimite">Data limite</label>
-                    <input type="date" id="dataLimite" required>
-                    <div id="erroData" class="erro"></div>
                 </div>
             </section>
 
@@ -120,4 +99,3 @@
     </footer>
 </body>
 </html>
-
