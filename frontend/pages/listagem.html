@@ -1,4 +1,5 @@
 <!-- Autor: Lucas Paes Amaro -->
+<!-- Tela de Listagem de Demandas: filtros, busca, ordenação e link para os detalhes -->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -10,51 +11,42 @@
 </head>
 <body>
 
-
-
-
-
-
     <!-- Titulo/Parte superior -->
     <div class="titulo-introducao">
-
-        <h1>Listagem de Demandas</h1>
-        <p>Gerencie e Acompanhe todas as demandas cadastradas.</p>
-
-        <button class="lateral-direita">Nova demanda</button>
+        <div>
+            <h1>Listagem de Demandas</h1>
+            <p>Gerencie e Acompanhe todas as demandas cadastradas.</p>
+        </div>
+        <a class="lateral-direita" href="/pages/cadastro.html">Nova demanda</a>
     </div>
 
-
-
-
     <!-- Barra de busca e filtros -->
-    <div class="barra-busca">
+    <form class="barra-busca" id="formFiltros">
 
-        <p>Filtrar por Título</p>
-        <select>
-            <option>Titulo-Placeholder1</option>
-            <option>Titulo-Placeholder2</option>
-            <option>Titulo-Placeholder3</option>
-        </select>
+        <p>Buscar</p>
+        <input type="text" id="busca" placeholder="Título ou descrição">
 
-        <p>Filtrar por Tipo</p>
-        <select>
+        <p>Tipo</p>
+        <select id="filtroTipo">
+            <option value="">Todos</option>
             <option>Tarefa</option>
             <option>Defeito</option>
             <option>Melhoria</option>
             <option>Documentação</option>
         </select>
 
-        <p>Filtrar por Prioridade</p>
-        <select>
+        <p>Prioridade</p>
+        <select id="filtroPrioridade">
+            <option value="">Todas</option>
             <option>Crítica</option>
             <option>Alta</option>
             <option>Média</option>
             <option>Baixa</option>
         </select>
 
-        <p>Filtrar por Status</p>
-        <select>
+        <p>Status</p>
+        <select id="filtroStatus">
+            <option value="">Todos</option>
             <option>Aberta</option>
             <option>Em andamento</option>
             <option>Em revisão</option>
@@ -62,48 +54,45 @@
             <option>Cancelada</option>
         </select>
 
-        <button>ativar filtro</button> 
+        <p>Ordenar por</p>
+        <select id="ordenar">
+            <option value="">Mais antigas primeiro</option>
+            <option value="prioridade">Prioridade</option>
+            <option value="status">Status</option>
+            <option value="dataCriacao">Data de criação</option>
+            <option value="prazo">Prazo</option>
+        </select>
 
-    </div>
+        <button type="submit">Filtrar</button>
+    </form>
 
+    <!-- Mensagem de carregando, lista vazia ou erro -->
+    <p class="mensagem" id="mensagem"></p>
 
-
-
-
-    <!-- Tabela de demandas -->
+    <!-- Tabela de demandas (as linhas são montadas pelo listagem.js) -->
     <div class="tabela-demandas">
         <table>
-            <tr> <!-- definindo nome das colunas-->
-                <th>titulo</th>
-                <th>tipo</th>
-                <th>prioridade</th>
-                <th>status</th>
-                <th>responsavel</th>
-                <th>data de criação</th>
-                <th>prazo de finalização</th>
-            </tr>
-            <tr> <!-- Linha 1 / Demanda 1 -->
-                <td>demanda1 titulo</td>
-                <td>demanda1 tipo</td>
-                <td>demanda1 prioridade</td>
-                <td>demanda1 status</td>
-                <td>demanda1 responsavel</td>
-                <td>demanda1 data_criação</td>
-                <td>demanda1 prazo</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Prioridade</th>
+                    <th>Status</th>
+                    <th>Responsável</th>
+                    <th>Data de criação</th>
+                    <th>Prazo</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabela"></tbody>
         </table>
     </div>
-
-
-
 
     <!-- Footer -->
     <div class="footer">
         <p>© Sistema de Gerenciamento de Demandas</p>
     </div>
 
-
-
-
+    <script src="/js/auth.js"></script>
+    <script src="/js/listagem.js"></script>
 </body>
 </html>

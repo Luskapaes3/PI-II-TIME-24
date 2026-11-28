@@ -84,3 +84,11 @@ th { background: #eee; color: #000; }
 
 /* footer */
 .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #666; }
+
+
+
+/* Campo de busca, link "Nova demanda" e mensagens da tela */
+.barra-busca input { padding: 6px 8px; font-size: 13px; border: 1px solid #ccc; border-radius: 3px; }
+a.lateral-direita { padding: 10px 18px; font-size: 13px; border-radius: 3px; text-decoration: none; }
+.tabela-demandas a { color: #0056b3; }
+.mensagem { font-size: 13px; color: #666; margin-bottom: 10px; }

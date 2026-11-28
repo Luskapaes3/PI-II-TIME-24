@@ -1,4 +1,4 @@
- //Autor: Lucas Paes
+// Autor: Lucas Paes Amaro
 // Sao os tipos do sistema, usado na tela, banco, etc, eh um tipo universal do sistema
 // e aos CHECK do banco, para que tela, API e Oracle aceitem os mesmos valores.
 
@@ -25,4 +25,4 @@ export interface Demanda {
   dataCriacao: string;            // servidor preenche
   dataAtualizacao: string;        // servidor preenche
   prazo: string | null;           // "AAAA-MM-DD"
-}
+}
