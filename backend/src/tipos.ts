@@ -1,4 +1,4 @@
-// Lucas Paes Amaro
+ //Autor: Lucas Paes
 // Sao os tipos do sistema, usado na tela, banco, etc, eh um tipo universal do sistema
 // e aos CHECK do banco, para que tela, API e Oracle aceitem os mesmos valores.
 
