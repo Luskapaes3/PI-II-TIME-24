@@ -1,15 +1,15 @@
- //Autor: Lucas Paes
+// Autor: Lucas Paes Amaro
 
 import "dotenv/config"; // le o arquivo .env pra pegar a porta
-import express from "express"; //transforma e em objeto (????)
+import express from "express"; // framework que cria o servidor e as rotas da API
 import path from "path";
 
 // Rotas de cada integrante (cada um tira o // da sua linha quando trouxer o arquivo)
 // import rotasLogin from "./rotas/login";          // Gabriel
 // import rotasUsuarios from "./rotas/usuarios";    // Gabriel
-import rotasDashboard from "./rotas/dashboard";  // Bernardo
-// import rotasListagem from "./rotas/listagem";    // Lucas
- import rotasCadastro from "./rotas/cadastro";    // Henrique
+import rotasDashboard from "./rotas/dashboard";     // Bernardo
+import rotasListagem from "./rotas/listagem";       // Lucas
+import rotasCadastro from "./rotas/cadastro";       // Henrique
 // import rotasDetalhes from "./rotas/detalhes";    // Matheus
 
 const app = express();
@@ -27,8 +27,8 @@ app.get("/status", (req, res) => {
 // app.use(rotasLogin);
 // app.use(rotasUsuarios);
 app.use(rotasDashboard);
-// app.use(rotasListagem);
- app.use(rotasCadastro);
+app.use(rotasListagem);
+app.use(rotasCadastro);
 // app.use(rotasDetalhes);
 
 // mostra as telas da pasta frontend: "/" abre o login, as outras ficam em /pages
