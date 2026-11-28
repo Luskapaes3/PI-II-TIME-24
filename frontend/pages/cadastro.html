@@ -14,7 +14,7 @@
             <h1>Cadastrar Demanda</h1>
             <p>Preencha as informações abaixo para registrar uma nova demanda.</p>
         </div>
-        <a class="btn-voltar" href="lista_demandas(1).html">Voltar para a Listagem</a>
+        <a class="btn-voltar" href="/pages/listagem.html">Voltar para a Listagem</a>
     </header>
 
     <main class="conteudo-principal">
@@ -62,19 +62,6 @@
 
                 <div class="linha">
                     <div class="campo">
-                        <label for="status">Status</label>
-                        <select id="status" required>
-                            <option value="">Selecione</option>
-                            <option value="aberta">Aberta</option>
-                            <option value="andamento">Em andamento</option>
-                            <option value="revisao">Em revisão</option>
-                            <option value="concluida">Concluída</option>
-                            <option value="cancelada">Cancelada</option>
-                        </select>
-                        <div id="erroStatus" class="erro"></div>
-                    </div>
-
-                    <div class="campo">
                         <label for="projeto">Projeto associado</label>
                         <select id="projeto" required>
                             <option value="">Selecione</option>
@@ -86,12 +73,12 @@
                         </select>
                         <div id="erroProjeto" class="erro"></div>
                     </div>
-                </div>
 
-                <div class="campo campo-data">
-                    <label for="dataLimite">Data limite</label>
-                    <input type="date" id="dataLimite" required>
-                    <div id="erroData" class="erro"></div>
+                    <div class="campo">
+                        <label for="dataLimite">Data limite</label>
+                        <input type="date" id="dataLimite" required>
+                        <div id="erroData" class="erro"></div>
+                    </div>
                 </div>
             </section>
 
@@ -112,4 +99,3 @@
     </footer>
 </body>
 </html>
-

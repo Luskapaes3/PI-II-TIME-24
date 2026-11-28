@@ -1,11 +1,10 @@
- //Autor: Henrique Kenji Tutiya
+//Autor: Henrique Kenji Tutiya
 const form = document.getElementById("formDemanda");
 
 const titulo = document.getElementById("titulo");
 const descricao = document.getElementById("descricao");
 const tipo = document.getElementById("tipo");
 const prioridade = document.getElementById("prioridade");
-const status = document.getElementById("status");
 const projeto = document.getElementById("projeto");
 const dataLimite = document.getElementById("dataLimite");
 
@@ -35,6 +34,52 @@ function limparErros() {
     document.querySelectorAll(".campo-invalido").forEach(function (campo) {
         campo.classList.remove("campo-invalido");
     });
+}
+
+
+// ===============================
+// CARREGAMENTO DE PROJETOS (GET /projetos)
+// ===============================
+
+async function carregarProjetos() {
+    try {
+        const resposta = await fetch("/projetos");
+        if (!resposta.ok) {
+            return;
+        }
+
+        const dados = await resposta.json().catch(function () {
+            return null;
+        });
+
+        const listaProjetos = Array.isArray(dados)
+            ? dados
+            : Array.isArray(dados?.projetos)
+                ? dados.projetos
+                : null;
+
+        if (!listaProjetos || listaProjetos.length === 0) {
+            return;
+        }
+
+        const valorAnterior = projeto.value;
+        projeto.innerHTML = '<option value="">Selecione</option>';
+
+        listaProjetos.forEach(function (item) {
+            if (item && item.id !== undefined && item.nome) {
+                const option = document.createElement("option");
+                option.value = String(item.id);
+                option.textContent = item.nome;
+                projeto.appendChild(option);
+            }
+        });
+
+        if (valorAnterior) {
+            projeto.value = valorAnterior;
+        }
+    } catch (erro) {
+        console.warn("Não foi possível carregar projetos de /projetos:", erro);
+    }
 }
 
 
@@ -124,16 +169,6 @@ function validarPrioridade() {
     return true;
 }
 
-function validarStatus() {
-    if (status.value === "") {
-        mostrarErro("erroStatus", "Selecione o status da demanda.", status);
-        return false;
-    }
-
-    mostrarErro("erroStatus", "", status);
-    return true;
-}
-
 function validarProjeto() {
     if (projeto.value === "") {
         mostrarErro("erroProjeto", "Selecione um projeto.", projeto);
@@ -188,7 +223,6 @@ function validarFormulario() {
     const descricaoValida = validarDescricao();
     const tipoValido = validarTipo();
     const prioridadeValida = validarPrioridade();
-    const statusValido = validarStatus();
     const projetoValido = validarProjeto();
     const dataValida = validarData();
 
@@ -197,7 +231,6 @@ function validarFormulario() {
         descricaoValida &&
         tipoValido &&
         prioridadeValida &&
-        statusValido &&
         projetoValido &&
         dataValida
     );
@@ -218,12 +251,11 @@ form.addEventListener("submit", async function (event) {
     }
 
     // Cria objeto com os dados da demanda
-const demanda = {
+    const demanda = {
         titulo: titulo.value.trim(),
         descricao: descricao.value.trim(),
         tipo: tipo.value,
         prioridade: prioridade.value,
-        status: status.value,
         projetoId: Number(projeto.value),
         prazo: dataLimite.value || null
     };
@@ -241,7 +273,6 @@ const demanda = {
             return {};
         });
 
-        // Verifica se o servidor retornou algum erro
         if (!resposta.ok) {
             alert(dados.erro || "Erro ao cadastrar demanda.");
             return;
@@ -253,11 +284,11 @@ const demanda = {
 
         // Rola a tela até o resultado
         painelResultado.scrollIntoView({ behavior: "smooth" });
-        } catch (erro) {
-                console.error("Erro:", erro);
-                alert("Não foi possível conectar ao servidor.");
-            }
-        });
+    } catch (erro) {
+        console.error("Erro:", erro);
+        alert("Não foi possível conectar ao servidor.");
+    }
+});
 
 
 // ===============================
@@ -280,6 +311,7 @@ descricao.addEventListener("blur", validarDescricao);
 
 tipo.addEventListener("change", validarTipo);
 prioridade.addEventListener("change", validarPrioridade);
-status.addEventListener("change", validarStatus);
 projeto.addEventListener("change", validarProjeto);
 dataLimite.addEventListener("change", validarData);
+
+carregarProjetos();
