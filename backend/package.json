@@ -2,7 +2,7 @@
   "name": "pi-ii-time-24",
   "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "Lucas Paes Amaro",
   "license": "ISC",
   "type": "commonjs",
   "scripts": {
@@ -23,4 +23,4 @@
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
-}
+}

@@ -1,4 +1,5 @@
-
+// Autor: Lucas Paes Amaro
+// Configuração do TypeScript do backend
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -11,4 +12,4 @@
     "outDir": "dist"
   },
   "include": ["src"]
-}
+}
