@@ -1,106 +1,130 @@
 // Autor: Bernardo Garcia Barbosa
-// Rota que retorna as informações do dashboard
+// Rota que busca as informações do dashboard no Oracle
 
 import { Router } from "express";
-import { demandas } from "../dados/demandas";
-import { StatusDemanda, PrioridadeDemanda, TipoDemanda } from "../tipos";
+import oracledb from "oracledb";
+import { getConn } from "../db";
 
 const router = Router();
 
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", async (req, res) => {
 
-    // Conta quantas demandas possuem o status recebido
-    const contarStatus = (status: StatusDemanda) =>
-        demandas.filter(demanda => demanda.status === status).length;
+    let conexao: oracledb.Connection | undefined;
 
-    // Conta as demandas de cada prioridade
-    const contarPrioridade = (prioridade: PrioridadeDemanda) =>
-        demandas.filter(demanda => demanda.prioridade === prioridade).length;
+    try {
 
-    // Conta as demandas de cada tipo
-    const contarTipo = (tipo: TipoDemanda) =>
-        demandas.filter(demanda => demanda.tipo === tipo).length;
+        // Abre a conexão com o banco
+        conexao = await getConn();
 
-    // Pega a data de hoje sem considerar o horario
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
+        // Conta as demandas de cada status
+        const status = await conexao.execute<any>(`
+            SELECT
+                COUNT(*) AS "total",
+                COUNT(CASE WHEN Status = 'Aberta'
+                    THEN 1 END) AS "abertas",
+                COUNT(CASE WHEN Status = 'Em andamento'
+                    THEN 1 END) AS "emAndamento",
+                COUNT(CASE WHEN Status = 'Em revisão'
+                    THEN 1 END) AS "emRevisao",
+                COUNT(CASE WHEN Status = 'Concluída'
+                    THEN 1 END) AS "concluidas",
+                COUNT(CASE WHEN Status = 'Cancelada'
+                    THEN 1 END) AS "canceladas"
+            FROM Demanda
+        `, [], {
+            outFormat: oracledb.OUT_FORMAT_OBJECT
+        });
 
-    // Soma 7 dias para verificar os prazos mais proximos
-    const limitePrazo = new Date(hoje);
-    limitePrazo.setDate(limitePrazo.getDate() + 7);
-    limitePrazo.setHours(23, 59, 59, 999);
+        // Conta as demandas de cada prioridade
+        const prioridade = await conexao.execute<any>(`
+            SELECT
+                COUNT(CASE WHEN Prioridade = 'Crítica'
+                    THEN 1 END) AS "critica",
+                COUNT(CASE WHEN Prioridade = 'Alta'
+                    THEN 1 END) AS "alta",
+                COUNT(CASE WHEN Prioridade = 'Média'
+                    THEN 1 END) AS "media",
+                COUNT(CASE WHEN Prioridade = 'Baixa'
+                    THEN 1 END) AS "baixa"
+            FROM Demanda
+        `, [], {
+            outFormat: oracledb.OUT_FORMAT_OBJECT
+        });
 
-    // Retira as demandas que ja foram concluidas ou canceladas
-    const demandasAtivas = demandas.filter(
-        demanda =>
-            demanda.status !== "Concluída" &&
-            demanda.status !== "Cancelada"
-    );
+        // Conta as demandas de cada tipo
+        const tipo = await conexao.execute<any>(`
+            SELECT
+                COUNT(CASE WHEN Tipo = 'Tarefa'
+                    THEN 1 END) AS "tarefa",
+                COUNT(CASE WHEN Tipo = 'Defeito'
+                    THEN 1 END) AS "defeito",
+                COUNT(CASE WHEN Tipo = 'Melhoria'
+                    THEN 1 END) AS "melhoria",
+                COUNT(CASE WHEN Tipo = 'Documentação'
+                    THEN 1 END) AS "documentacao"
+            FROM Demanda
+        `, [], {
+            outFormat: oracledb.OUT_FORMAT_OBJECT
+        });
 
-    // Pega apenas as demandas criticas que continuam ativas
-    const criticasEmAberto = demandasAtivas
-        .filter(demanda => demanda.prioridade === "Crítica")
-        .map(demanda => ({
-            titulo: demanda.titulo
-        }));
+        // Busca as demandas críticas que ainda estão ativas
+        const criticas = await conexao.execute(`
+            SELECT
+                ID_Demanda AS "id",
+                Titulo AS "titulo"
+            FROM Demanda
+            WHERE Prioridade = 'Crítica'
+            AND Status NOT IN ('Concluída', 'Cancelada')
+        `, [], {
+            outFormat: oracledb.OUT_FORMAT_OBJECT
+        });
 
-    // Verifica quais demandas possuem prazo nos proximos 7 dias
-    const demandasProximasDoPrazo = demandasAtivas
-        .filter(demanda => {
+        // Busca as demandas que vencem nos próximos 7 dias
+        const prazos = await conexao.execute(`
+            SELECT
+                ID_Demanda AS "id",
+                Titulo AS "titulo",
+                TO_CHAR(Prazo_Final, 'YYYY-MM-DD') AS "prazo"
+            FROM Demanda
+            WHERE TRUNC(Prazo_Final)
+                BETWEEN TRUNC(SYSDATE)
+                AND TRUNC(SYSDATE) + 7
+            AND Status NOT IN ('Concluída', 'Cancelada')
+            ORDER BY Prazo_Final
+        `, [], {
+            outFormat: oracledb.OUT_FORMAT_OBJECT
+        });
 
-            // Algumas demandas podem não ter prazo
-            if (!demanda.prazo) {
-                return false;
+        // Envia todas as informações para o HTML
+        return res.status(200).json({
+            ...status.rows![0],
+            porPrioridade: prioridade.rows![0],
+            porTipo: tipo.rows![0],
+            criticasEmAberto: criticas.rows,
+            demandasProximasDoPrazo: prazos.rows
+        });
+
+    } catch (erro) {
+
+        // Mostra o erro caso não consiga buscar os dados
+        console.error("Erro no Dashboard:", erro);
+
+        return res.status(500).json({
+            erro: "Erro ao carregar as demandas."
+        });
+
+    } finally {
+
+        // Fecha a conexão com o banco
+        if (conexao) {
+            try {
+                await conexao.close();
+            } catch (erro) {
+                console.error("Erro ao fechar conexão:", erro);
             }
-
-            const prazo = new Date(`${demanda.prazo}T12:00:00`);
-
-            return prazo >= hoje && prazo <= limitePrazo;
-        })
-
-        // Ordena as demandas pelo prazo
-        .sort((a, b) => (a.prazo ?? "").localeCompare(b.prazo ?? ""))
-
-        // Pega somente as informações que serão usadas na tela
-        .map(demanda => ({
-            titulo: demanda.titulo,
-            prazo: demanda.prazo
-        }));
-
-    // Junta todas as informações que o HTML precisa receber
-    const dadosDashboard = {
-
-        total: demandas.length,
-
-        abertas: contarStatus("Aberta"),
-        emAndamento: contarStatus("Em andamento"),
-        emRevisao: contarStatus("Em revisão"),
-        concluidas: contarStatus("Concluída"),
-        canceladas: contarStatus("Cancelada"),
-
-        // Quantidade por prioridade
-        porPrioridade: {
-            critica: contarPrioridade("Crítica"),
-            alta: contarPrioridade("Alta"),
-            media: contarPrioridade("Média"),
-            baixa: contarPrioridade("Baixa")
-        },
-
-        // Quantidade por tipo
-        porTipo: {
-            tarefa: contarTipo("Tarefa"),
-            defeito: contarTipo("Defeito"),
-            melhoria: contarTipo("Melhoria"),
-            documentacao: contarTipo("Documentação")
-        },
-
-        criticasEmAberto,
-        demandasProximasDoPrazo
-    };
-
-    // Envia os dados em JSON para o frontend
-    return res.status(200).json(dadosDashboard);
+        }
+    }
 });
 
-// Permite usar essa rota no servidor principal
+// Permite usar a rota no servidor principal
 export default router;
