@@ -1,3 +1,5 @@
+/* Autor: Gabriel André Cogo Fernandes*/
+
 body{
     font-family: Arial, sans-serif;
     display: flex;
@@ -7,7 +9,6 @@ body{
 
     /* Define a altura mínima da página */
     min-height: 90vh;
-
 
     background: linear-gradient(to left, #cacbcc, #6c96b8);
 }
@@ -133,3 +134,26 @@ body{
 .requisitos li.ok::before {
     content: "✓ ";
 }
+
+/* Caixa de erro devolvido pela API: começa escondida */
+.erro-api {
+    display: none;
+    color: #d9534f;
+    background-color: #fdf0ef;
+    border-left: 3px solid #d9534f;
+    font-size: 13px;
+    padding: 8px 12px;
+    margin: 0 0 16px 0;
+}
+
+/* Quando recebe a classe "visivel", aparece */
+.erro-api.visivel {
+    display: block;
+}
+
+/* Botão desativado enquanto espera a resposta da API */
+.acesso button:disabled {
+    background-color: #7a9fc0;
+    cursor: not-allowed;
+}
+ 

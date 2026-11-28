@@ -1,0 +1,40 @@
+<!--Autor: Gabriel André Cogo Fernandes-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Teste de sessão</title>
+</head>
+<body>
+    <div id="login">
+        <h1>Você está logado</h1>
+        <p class="descricao" id="textoUsuario"></p>
+        <p class="descricao" id="dadosUsuario" style="overflow-wrap: anywhere;"></p>
+
+        <div class="acesso">
+            <button type="button" id="botaoSair">Sair</button>
+        </div>
+    </div>
+
+    <!-- 1) Carrega as funções de sessão -->
+    <script src="auth.js"></script>
+    <script>
+        // 2) Se não tiver ninguém logado, volta para a tela de login
+        exigirLogin();
+
+        // 3) Mostra os dados do usuário que o login guardou
+        const usuarioLogado = obterUsuario();
+        if (usuarioLogado){
+            document.querySelector("#textoUsuario").textContent =
+                "Logado como: " + (usuarioLogado.nome || usuarioLogado.email || "usuário");
+            document.querySelector("#dadosUsuario").textContent = JSON.stringify(usuarioLogado);
+        }
+
+        // 4) O botão Sair encerra a sessão e volta para o login
+        document.querySelector("#botaoSair").addEventListener("click", sair);
+    </script>
+</body>
+</html>

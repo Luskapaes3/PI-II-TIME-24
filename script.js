@@ -1,3 +1,8 @@
+/* Autor: Gabriel André Cogo Fernandes*/
+
+
+const PAGINA_APOS_LOGIN = "pagina-teste.html";
+
 const formulario = document.querySelector("#formLogin");
 
 const campoUsuario = document.querySelector("#usuario");
@@ -9,6 +14,10 @@ const erroSenha = document.querySelector("#erroSenha");
 const reqSenha = document.querySelector("#reqSenha");
 
 const mensagemSucesso = document.querySelector("#mensagemSucesso");
+
+// Caixa de erro das mensagens que vêm da API e botão de envio
+const erroApi = document.querySelector("#erroApi");
+const botaoAcessar = document.querySelector("#botaoAcessar");
 
 // Itens da lista de requisitos (cada um vira verde quando cumprido)
 const itemEmail = document.querySelector("#reqEmail");
@@ -41,7 +50,29 @@ function limparErros() {
     erroUsuario.innerText = "";
     erroSenha.innerText = "";
 
+    // Limpa também o erro que veio da API
+    erroApi.innerText = "";
+    erroApi.classList.remove("visivel");
+
     mensagemSucesso.innerText = "";
+}
+
+// Mostra, na tela, uma mensagem de erro que veio da API (ou de falha de conexão)
+function mostrarErroApi(mensagem){
+    erroApi.innerText = mensagem;
+    erroApi.classList.add("visivel");
+}
+
+// Liga/desliga o botão enquanto espera a resposta da API (evita clicar duas vezes)
+function ativarBotao(ativo){
+    botaoAcessar.disabled = !ativo;
+    botaoAcessar.innerText = ativo ? "Acessar" : "Entrando...";
+}
+
+// Monta o JSON que a rota POST /login recebe.
+// Se a sua rota esperar outros nomes de campo, é só trocar aqui.
+function montarCorpoLogin(usuario, senha){
+    return { email: usuario, senha: senha };
 }
 
 // Liga ou desliga a classe "ok" de um item (verde com ✓)
@@ -88,7 +119,8 @@ campoSenha.addEventListener("blur", function () {
     reqSenha.classList.remove("visivel");
 });
 
-formulario.addEventListener("submit", function (event){
+// "async" porque dentro dele esperamos a resposta da API (await)
+formulario.addEventListener("submit", async function (event){
     event.preventDefault();
     limparErros();
 
@@ -97,7 +129,7 @@ formulario.addEventListener("submit", function (event){
 
     let formValido = true;
 
-    // Valida se o email ou telefone se eles não estão vazios 
+    // Valida se o email ou telefone se eles não estão vazios
     if (usuario === ""){
         mostrarErro(campoUsuario, erroUsuario, "Informe o email ou telefone.");
         formValido = false;
@@ -134,8 +166,27 @@ formulario.addEventListener("submit", function (event){
         formValido = false;
     }
 
-    // Se todas as exigencias foram feitas, o login é realizado com sucesso
+    // Se todas as exigencias foram feitas, envia os dados para a API
     if (formValido){
+        ativarBotao(false);
+
+        // POST /login: manda e-mail e senha e espera a resposta
+        const resposta = await chamarApi("/login", {
+            method: "POST",
+            body: JSON.stringify(montarCorpoLogin(usuario, senha))
+        });
+
+        // Se a API respondeu com erro (400, 401, 404...), mostra a mensagem dela na tela
+        if (!resposta.ok){
+            mostrarErroApi(mensagemDaApi(resposta.status, resposta.dados));
+            ativarBotao(true);
+            return;
+        }
+
+        // Login certo: a API pode devolver { token, usuario } ou só os dados do usuário
+        const usuarioLogado = resposta.dados.usuario || resposta.dados;
+        salvarSessao(resposta.dados.token, usuarioLogado);
+
         mensagemSucesso.innerText = "Login realizado com sucesso!";
         formulario.reset();
 
@@ -143,6 +194,9 @@ formulario.addEventListener("submit", function (event){
         atualizarRequisitosUsuario();
         atualizarRequisitosSenha();
 
-        window.open("https://www.rockstargames.com/VI", "_blank");
+        // Espera um instante para a pessoa ver a mensagem e abre a próxima tela
+        setTimeout(function (){
+            window.location.href = PAGINA_APOS_LOGIN;
+        }, 800);
     }
 });
