@@ -1,4 +1,4 @@
- //Autor: Henrique
+ //Autor: Henrique Kenji Tutiya
 const form = document.getElementById("formDemanda");
 
 const titulo = document.getElementById("titulo");
@@ -18,13 +18,22 @@ const btnCancelar = document.getElementById("btnCancelar");
 // FUNÇÕES AUXILIARES
 // ===============================
 
-function mostrarErro(id, mensagem) {
-    document.getElementById(id).textContent = mensagem;
+function mostrarErro(idErro, mensagem, campoElemento = null) {
+    const elementoErro = document.getElementById(idErro);
+    elementoErro.textContent = mensagem;
+
+    if (campoElemento) {
+        campoElemento.classList.toggle("campo-invalido", Boolean(mensagem));
+    }
 }
 
 function limparErros() {
     document.querySelectorAll(".erro").forEach(function (erro) {
         erro.textContent = "";
+    });
+
+    document.querySelectorAll(".campo-invalido").forEach(function (campo) {
+        campo.classList.remove("campo-invalido");
     });
 }
 
@@ -37,21 +46,21 @@ function validarTitulo() {
     const valor = titulo.value.trim();
 
     if (valor === "") {
-        mostrarErro("erroTitulo", "O título é obrigatório.");
+        mostrarErro("erroTitulo", "O título é obrigatório.", titulo);
         return false;
     }
 
     if (valor.length < 5) {
-        mostrarErro("erroTitulo", "O título deve ter pelo menos 5 caracteres.");
+        mostrarErro("erroTitulo", "O título deve ter pelo menos 5 caracteres.", titulo);
         return false;
     }
 
     if (valor.length > 100) {
-        mostrarErro("erroTitulo", "O título deve ter no máximo 100 caracteres.");
+        mostrarErro("erroTitulo", "O título deve ter no máximo 100 caracteres.", titulo);
         return false;
     }
 
-    mostrarErro("erroTitulo", "");
+    mostrarErro("erroTitulo", "", titulo);
     return true;
 }
 
@@ -64,14 +73,15 @@ function validarDescricao() {
     const valor = descricao.value.trim();
 
     if (valor === "") {
-        mostrarErro("erroDescricao", "A descrição é obrigatória.");
+        mostrarErro("erroDescricao", "A descrição é obrigatória.", descricao);
         return false;
     }
 
     if (valor.length < 10) {
         mostrarErro(
             "erroDescricao",
-            "A descrição deve ter pelo menos 10 caracteres."
+            "A descrição deve ter pelo menos 10 caracteres.",
+            descricao
         );
         return false;
     }
@@ -79,12 +89,13 @@ function validarDescricao() {
     if (valor.length > 500) {
         mostrarErro(
             "erroDescricao",
-            "A descrição deve ter no máximo 500 caracteres."
+            "A descrição deve ter no máximo 500 caracteres.",
+            descricao
         );
         return false;
     }
 
-    mostrarErro("erroDescricao", "");
+    mostrarErro("erroDescricao", "", descricao);
     return true;
 }
 
@@ -95,41 +106,41 @@ function validarDescricao() {
 
 function validarTipo() {
     if (tipo.value === "") {
-        mostrarErro("erroTipo", "Selecione o tipo da demanda.");
+        mostrarErro("erroTipo", "Selecione o tipo da demanda.", tipo);
         return false;
     }
 
-    mostrarErro("erroTipo", "");
+    mostrarErro("erroTipo", "", tipo);
     return true;
 }
 
 function validarPrioridade() {
     if (prioridade.value === "") {
-        mostrarErro("erroPrioridade", "Selecione a prioridade.");
+        mostrarErro("erroPrioridade", "Selecione a prioridade.", prioridade);
         return false;
     }
 
-    mostrarErro("erroPrioridade", "");
+    mostrarErro("erroPrioridade", "", prioridade);
     return true;
 }
 
 function validarStatus() {
     if (status.value === "") {
-        mostrarErro("erroStatus", "Selecione o status da demanda.");
+        mostrarErro("erroStatus", "Selecione o status da demanda.", status);
         return false;
     }
 
-    mostrarErro("erroStatus", "");
+    mostrarErro("erroStatus", "", status);
     return true;
 }
 
 function validarProjeto() {
     if (projeto.value === "") {
-        mostrarErro("erroProjeto", "Selecione um projeto.");
+        mostrarErro("erroProjeto", "Selecione um projeto.", projeto);
         return false;
     }
 
-    mostrarErro("erroProjeto", "");
+    mostrarErro("erroProjeto", "", projeto);
     return true;
 }
 
@@ -142,7 +153,7 @@ function validarData() {
     const valor = dataLimite.value;
 
     if (valor === "") {
-        mostrarErro("erroData", "A data limite é obrigatória.");
+        mostrarErro("erroData", "A data limite é obrigatória.", dataLimite);
         return false;
     }
 
@@ -157,12 +168,13 @@ function validarData() {
     if (valor < dataAtual) {
         mostrarErro(
             "erroData",
-            "A data limite não pode ser anterior à data atual."
+            "A data limite não pode ser anterior à data atual.",
+            dataLimite
         );
         return false;
     }
 
-    mostrarErro("erroData", "");
+    mostrarErro("erroData", "", dataLimite);
     return true;
 }
 
@@ -196,7 +208,7 @@ function validarFormulario() {
 // SUBMIT DO FORMULÁRIO
 // ===============================
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     limparErros();
@@ -206,26 +218,44 @@ form.addEventListener("submit", function (event) {
     }
 
     // Cria objeto com os dados da demanda
-    const demanda = {
+const demanda = {
         titulo: titulo.value.trim(),
         descricao: descricao.value.trim(),
         tipo: tipo.value,
         prioridade: prioridade.value,
         status: status.value,
-        projeto: projeto.value,
-        dataLimite: dataLimite.value
+        projetoId: Number(projeto.value),
+        prazo: dataLimite.value || null
     };
 
-    // Exibe os dados formatados
-    resultado.textContent = JSON.stringify(demanda, null, 2);
+    try {
+        const resposta = await fetch("/demandas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(demanda)
+        });
 
-    painelResultado.style.display = "block";
+        const dados = await resposta.json();
 
-    // Opcional: rola a tela até o resultado
-    painelResultado.scrollIntoView({
-        behavior: "smooth"
-    });
-});
+        // Verifica se o servidor retornou algum erro
+        if (!resposta.ok) {
+            alert(dados.erro || "Erro ao cadastrar demanda.");
+            return;
+        }
+
+        // Cadastro realizado com sucesso
+        resultado.textContent = JSON.stringify(dados, null, 2);
+        painelResultado.style.display = "block";
+
+        // Rola a tela até o resultado
+        painelResultado.scrollIntoView({ behavior: "smooth" });
+        } catch (erro) {
+                console.error("Erro:", erro);
+                alert("Não foi possível conectar ao servidor.");
+            }
+        });
 
 
 // ===============================

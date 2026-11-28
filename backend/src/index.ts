@@ -1,4 +1,4 @@
- //Autor: Henrique
+ //Autor: Lucas Paes
 
 import "dotenv/config"; // le o arquivo .env pra pegar a porta
 import express from "express"; //transforma e em objeto (????)

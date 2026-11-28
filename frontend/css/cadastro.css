@@ -1,4 +1,4 @@
-/* Autor: Henrique*/
+/* Autor: Henrique Kenji Tutiya*/
 * {
     margin: 0;
     padding: 0;
@@ -143,6 +143,11 @@ textarea {
     font-size: 12px;
     min-height: 16px;
     margin-top: 5px;
+}
+
+.campo-invalido {
+    border-color: #c62828 !important;
+    box-shadow: 0 0 0 2px rgba(198, 40, 40, 0.12);
 }
 
 /* Botões */

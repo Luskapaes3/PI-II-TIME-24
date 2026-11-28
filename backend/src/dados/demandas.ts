@@ -1,18 +1,10 @@
-// Autor: Henrique
+// Autor: Henrique Kenji Tutiya
 export const projetos = [
   { id: 1, nome: "Portal do Aluno", descricao: "Sistema acadêmico para alunos" },
   { id: 2, nome: "Sistema Financeiro", descricao: "Controle financeiro da empresa" },
   { id: 3, nome: "Aplicativo Mobile", descricao: "Aplicativo para dispositivos móveis" },
   { id: 4, nome: "Sistema de Estoque", descricao: "Gerenciamento de produtos e estoque" },
   { id: 5, nome: "Plataforma EAD", descricao: "Plataforma de ensino a distância" }
-];
-
-export const usuarios = [
-  { id: 1, nome: "Carla", email: "carla@exemplo.com" },
-  { id: 2, nome: "Bruno", email: "bruno@exemplo.com" },
-  { id: 3, nome: "Mariana", email: "mariana@exemplo.com" },
-  { id: 4, nome: "Lucas", email: "lucas@exemplo.com" },
-  { id: 5, nome: "Rafael", email: "rafael@exemplo.com" }
 ];
 
 export const demandas = [
