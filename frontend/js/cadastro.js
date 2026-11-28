@@ -237,7 +237,9 @@ const demanda = {
             body: JSON.stringify(demanda)
         });
 
-        const dados = await resposta.json();
+        const dados = await resposta.json().catch(function () {
+            return {};
+        });
 
         // Verifica se o servidor retornou algum erro
         if (!resposta.ok) {
