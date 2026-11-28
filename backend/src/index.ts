@@ -5,8 +5,8 @@ import express from "express"; // framework que cria o servidor e as rotas da AP
 import path from "path";
 
 // Rotas de cada integrante (cada um tira o // da sua linha quando trouxer o arquivo)
-// import rotasLogin from "./rotas/login";          // Gabriel
-// import rotasUsuarios from "./rotas/usuarios";    // Gabriel
+import rotasLogin from "./rotas/login";             //Gabriel
+import rotasUsuarios from "./rotas/usuarios";       //Gabriel
 import rotasDashboard from "./rotas/dashboard";     // Bernardo
 import rotasListagem from "./rotas/listagem";       // Lucas
 import rotasCadastro from "./rotas/cadastro";       // Henrique
@@ -24,8 +24,8 @@ app.get("/status", (req, res) => {
 });
 
 // rotas da API (cada um tira o // da sua linha)
-// app.use(rotasLogin);
-// app.use(rotasUsuarios);
+app.use(rotasLogin);
+app.use(rotasUsuarios);
 app.use(rotasDashboard);
 app.use(rotasListagem);
 app.use(rotasCadastro);
